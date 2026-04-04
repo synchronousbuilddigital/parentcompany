@@ -155,11 +155,11 @@ export default function Investment() {
                   <h3 className="font-headline italic text-5xl mb-12 text-center">Submission of Intent.</h3>
                   <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
                         <div className="border-b border-gold/20 pb-4 transition-colors duration-500 focus-within:border-gold">
-                            <input type="text" placeholder="FULL NAME / ORGANISATION" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold" />
+                            <input type="text" placeholder="IDENTITY / GROUP" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold" />
                         </div>
                         <div className="flex flex-col md:flex-row gap-12">
                              <div className="flex-1 border-b border-gold/20 pb-4 transition-colors duration-500 focus-within:border-gold">
-                                <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold" />
+                                <input type="email" placeholder="SECURE CHANNEL" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold" />
                              </div>
                              <div className="flex-1">
                                 <CustomDropdown 
@@ -171,10 +171,10 @@ export default function Investment() {
                              </div>
                         </div>
                         <div className="border-b border-gold/20 pb-4 transition-colors duration-500 focus-within:border-gold">
-                            <textarea placeholder="PROPOSAL OR INVESTMENT SUMMARY" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold h-32 resize-none" />
+                            <textarea placeholder="PROPOSAL SUMMARY" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-gold/20 font-body text-sm uppercase tracking-widest text-gold h-32 resize-none" />
                         </div>
                         <button className="w-full py-8 bg-gold text-dark font-industrial text-2xl tracking-[0.4em] hover:scale-[1.02] transition-all uppercase flex items-center justify-center gap-4">
-                            <span>Reach Out to the Group</span>
+                            <span>Reach OUT</span>
                             <span className="material-symbols-outlined">mail</span>
                         </button>
                   </form>

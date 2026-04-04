@@ -85,7 +85,7 @@ export default function Leadership() {
                              <h3 className="font-headline italic text-3xl mb-1 text-gold">Dheeraj Anand</h3>
                              <p className="font-body text-[8px] tracking-[0.4em] text-glacier/40 mb-6 font-bold uppercase">FOUNDER · Bworth</p>
                              <p className="font-body text-[11px] text-glacier/60 leading-relaxed italic border-l border-gold/20 pl-4">
-                                 "Defining the industrial aesthetic through distinctive premium apparel and lifestyle garments."
+                                 "With 18 years of deep expertise in building businesses, Dheeraj leads Bworth with a strategic vision to redefine sustainability in fashion, combining business acumen with a passion for environmental impact."
                              </p>
                          </Link>
                      </div>

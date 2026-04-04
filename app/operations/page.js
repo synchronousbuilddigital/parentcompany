@@ -133,7 +133,7 @@ export default function Operations() {
                 </div>
                 <div className="p-10 border border-white/5 bg-white/[0.01]">
                     <h4 className="font-industrial text-gold tracking-[0.4em] text-[10px] mb-4 uppercase">Innovation Nodes</h4>
-                    <p className="font-body text-xs text-glacier/40 italic">Centralizing our Neural OS development in Bengaluru to tap into the world's most elite-tier engineering talent.</p>
+                    <p className="font-body text-xs text-glacier/40 italic">Centralizing our Neural OS development in Bengaluru to tap into India's most elite-tier engineering talent.</p>
                 </div>
                  <div className="p-10 border border-white/5 bg-white/[0.01]">
                     <h4 className="font-industrial text-gold tracking-[0.4em] text-[10px] mb-4 uppercase">Agri-Spheres</h4>
@@ -143,7 +143,7 @@ export default function Operations() {
         </div>
 
         {/* Closing Contact CTA */}
-        <section className="py-64 md:pt-32 text-center">
+        <section className="py-24 md:py-32 text-center">
              <h2 className="font-headline italic text-7xl md:text-[10rem] text-glacier/10 leading-none">Scale with us.</h2>
              <Link href="/invest" className="text-gold font-industrial text-xl tracking-[0.4em] border-b border-gold/40 pb-2 hover:border-gold transition-all uppercase mt-12 inline-block">
                 Expand Territory →

@@ -132,7 +132,7 @@ export default function Home() {
         </section>
 
         {/* 2. ABOUT THE GROUP */}
-        <section ref={aboutSection.ref} className="py-24 md:py-64 px-6 md:px-24 flex flex-col lg:flex-row items-center gap-24 relative overflow-visible">
+        <section ref={aboutSection.ref} className="py-24 md:py-32 px-6 md:px-24 flex flex-col lg:flex-row items-center gap-24 relative overflow-visible">
             <div className={`w-full lg:w-3/5 transition-all duration-1000 ease-out ${aboutSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'}`}>
                 <h2 className="font-headline font-light italic text-4xl md:text-7xl mb-12 leading-tight">
                     A singular standard of excellence across the national industrial landscape.
@@ -141,7 +141,7 @@ export default function Home() {
                 <p className="font-body text-lg md:text-xl text-glacier/80 leading-relaxed max-w-2xl">
                     We integrate design excellence with operational efficiency in every sector we touch. 
                     From high-frequency biotech and renewable energy grids to the structural integrity 
-                    of the world's most ambitious megaprojects, our mission is to build what lasts. 
+                    of the nation's most ambitious megaprojects, our mission is to build what lasts. 
                 </p>
             </div>
             
@@ -177,7 +177,7 @@ export default function Home() {
         <section ref={companiesSection.ref} className="py-24 md:py-32 px-6 md:px-24 bg-dark/40 relative">
             <h3 className="font-industrial text-xs tracking-[0.5em] text-gold mb-16 md:mb-32 uppercase text-center md:text-left">The Portfolio Spread</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-32 relative lg:min-h-[1700px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-32 relative lg:min-h-[1350px]">
                 {/* Bworth */}
                 <div className={`md:col-span-12 lg:absolute lg:top-0 lg:left-0 lg:w-1/2 perspective-card transition-all duration-1000 ${companiesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
                     <div className="perspective-card-inner group p-8 md:p-12 bg-white/5 border border-white/5 hover:border-gold/30 hover:bg-white/[0.08] transition-all rounded-sm flex flex-col gap-8">
@@ -278,7 +278,7 @@ export default function Home() {
                              <h5 className="font-headline text-3xl italic text-glacier mb-2 group-hover:text-gold transition-colors">Dheeraj Anand</h5>
                              <p className="font-body text-[10px] uppercase tracking-[0.3em] text-gold/60 mb-8">FOUNDER · Bworth</p>
                              <p className="font-body text-xs italic text-glacier/40 group-hover:text-glacier/80 transition-opacity translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-500">
-                                "DEFINING THE INDUSTRIAL AESTHETIC."
+                                "18 YEARS OF REDEFINING SUSTAINABILITY."
                              </p>
                         </Link>
                     </div>
@@ -335,7 +335,7 @@ export default function Home() {
         </section>
 
         {/* 5. VISION MANIFESTO */}
-        <section ref={visionSection.ref} className="py-64 px-8 md:px-24 bg-dark relative overflow-hidden">
+        <section ref={visionSection.ref} className="py-24 md:py-32 px-8 md:px-24 bg-dark relative overflow-hidden">
             <div className={`transition-all duration-[2000ms] ${visionSection.isVisible ? 'opacity-10 scale-100 revolve' : 'opacity-0 scale-110'}`}>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] border-[0.5px] border-gold rounded-full opacity-20" />
@@ -345,10 +345,10 @@ export default function Home() {
             
             <div className={`relative z-10 max-w-5xl translate-y-0 transition-opacity duration-1000 delay-500 ${visionSection.isVisible ? 'opacity-100' : 'opacity-0 translate-y-12'}`}>
                 <span className="font-headline text-9xl text-gold/10 absolute -top-24 -left-12 leading-none">“</span>
-                <blockquote className="font-headline italic text-5xl md:text-8xl leading-tight text-glacier/90 text-right">
-                    We do not build for the <span className="text-gold">moment.</span> <br /> 
-                    We craft the infrastructure of <br />
-                    <span className="text-shadow-gold">generations.</span>
+                <blockquote className="font-headline text-5xl md:text-[9rem] leading-[0.8] text-glacier/90 text-right uppercase font-industrial tracking-tighter">
+                    We do not build for the <span className="text-gold-premium block mt-4">moment.</span> <br /> 
+                    <span className="italic font-headline lowercase text-4xl md:text-6xl normal-case tracking-normal block mt-12 opacity-40">We craft the infrastructure of</span>
+                    <span className="text-gold-premium block mt-4">generations.</span>
                 </blockquote>
             </div>
         </section>
@@ -360,8 +360,8 @@ export default function Home() {
                     <h2 className="font-headline text-5xl md:text-9xl mb-8 leading-none italic">Build Something <br /> That Lasts.</h2>
                     <div className="flex gap-12 mt-16 font-body text-[10px] uppercase tracking-[0.5em] font-bold">
                         <div>
-                             <span className="block opacity-40 mb-2">New Delhi HQ</span>
-                             <span>Connaught Place</span>
+                             <span className="block opacity-40 mb-2">Gurugram HQ</span>
+                             <span>DLF Cyber City</span>
                         </div>
                         <div>
                              <span className="block opacity-40 mb-2">Bengaluru</span>
@@ -381,7 +381,7 @@ export default function Home() {
                             <textarea placeholder="PROPOSAL SUMMARY" className="w-full bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-dark/30 font-body text-sm uppercase tracking-widest h-32 resize-none" />
                         </div>
                         <button className="w-full py-8 border border-dark/20 font-industrial text-lg md:text-2xl tracking-[0.2em] md:tracking-[0.4em] hover:bg-dark hover:text-gold transition-all duration-700 uppercase group flex items-center justify-center gap-4">
-                            <span>Reach Out to Us</span>
+                            <span>Reach OUT</span>
                             <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">mail</span>
                         </button>
                     </form>
