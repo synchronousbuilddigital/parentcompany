@@ -293,6 +293,22 @@ const founders = [
         focus: "Circular Luxury Fashion, Ethical Upcycling Ecosystems & Sustainable Global Value Chain Integration.",
         philosophy: "Redefining the value of waste through industrial-scale circular luxury fashion architecture.",
         logo: "/BWORTH.jpg"
+    },
+    {
+        name: "Yograj Rundhanker",
+        role: "Founder & CEO · RYM Grenergy",
+        vision: "Enabling a carbon-neutral future by developing the world’s greenest battery cell and intelligent green-tech infrastructure.",
+        focus: "Clean Energy, AI/ML-driven IoT Innovations & Smart Energy Automation Systems.",
+        philosophy: "Harnessing deep-tech intelligence to solve critical energy challenges.",
+        logo: "https://rymgrenergy.com/images/logo.png"
+    },
+    {
+        name: "Devam Srivastava",
+        role: "Founder & CEO · Synchronous",
+        vision: "Architecting high-velocity digital ecosystems for high-growth elite brands via algorithmic process automation.",
+        focus: "Brand Identity Architecture, Autonomous AI Agents & Predictive Growth Modeling.",
+        philosophy: "Scaling institutional legacies through the convergence of high-conversion engineering and aesthetics.",
+        logo: "/sync.jpg"
     }
 ];
 

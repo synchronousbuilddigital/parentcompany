@@ -14,7 +14,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
   const { scrollY } = useScroll();
   const pathname = usePathname();
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -22,30 +21,24 @@ export default function Navbar() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Determine scrolled status
     setScrolled(latest > 50);
-
-    // Fade navbar out on scroll down, in on scroll up
-    if (latest > lastScrollY && latest > 200) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
     setLastScrollY(latest);
   });
 
-  const isLightPage = ["/", "/about", "/leadership", "/portfolio", "/contact"].includes(pathname);
+  const isLightPage = ["/", "/about", "/leadership", "/portfolio", "/contact", "/companies"].includes(pathname);
   const isTransparent = !scrolled && isLightPage;
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{
-        y: visible ? 0 : -100,
-        opacity: visible ? 1 : 0
+        y: 0,
+        opacity: 1
       }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 w-full z-[100] transition-all duration-1000 ease-in-out ${!isTransparent
-          ? "bg-white/90 backdrop-blur-xl shadow-[0_1px_10px_rgba(0,18,51,0.05)] py-4"
-          : "bg-transparent py-8"
+      className={`fixed top-0 w-full z-[100] transition-all duration-700 ease-in-out h-20 md:h-24 flex items-center ${
+        !isTransparent
+          ? "bg-white/90 backdrop-blur-xl shadow-[0_1px_10px_rgba(0,18,51,0.05)]"
+          : "bg-white/5 backdrop-blur-sm"
         }`}
     >
       <div className="max-w-[1800px] mx-auto px-6 md:px-14 flex justify-between items-center whitespace-nowrap">
@@ -61,8 +54,7 @@ export default function Navbar() {
               alt="RISEMATE Logo"
               fill
               sizes="(max-width: 768px) 150px, 192px"
-              className={`object-contain object-left scale-125 transition-all duration-1000 ${isTransparent && !isLightPage ? "brightness-0 invert opacity-90" : "brightness-100"
-                } group-hover:opacity-100`}
+              className="object-contain object-left scale-125 transition-all duration-1000 group-hover:opacity-100"
               priority
               unoptimized={true}
             />
@@ -125,13 +117,6 @@ export default function Navbar() {
                 <span className="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
               </span>
             </Link>
-
-            {/* Global Language Switcher */}
-            <div className={`flex gap-3 text-[10px] font-black transition-colors duration-1000 ${isTransparent && !isLightPage ? "text-white/40" : "text-dark/40"
-              }`}>
-              <span className={`cursor-not-allowed hover:text-blue-600 transition-colors ${isTransparent && !isLightPage ? "text-white" : "text-dark"
-                }`}>EN</span>
-            </div>
           </motion.div>
         </div>
 
