@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body suppressHydrationWarning={true} className="bg-white text-dark font-secondary overflow-x-hidden selection:bg-blue-600 selection:text-white antialiased">
+      <body suppressHydrationWarning={true} className="bg-white text-dark font-secondary overflow-x-hidden selection:bg-[#002366] selection:text-white antialiased grain">
         <PageAnimatePresence>
           {children}
         </PageAnimatePresence>

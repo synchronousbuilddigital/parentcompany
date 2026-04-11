@@ -57,7 +57,7 @@ const SectionLabel = ({ children }) => (
             <span className="absolute inset-0 bg-[#002366]/20 blur-md rounded-full animate-pulse"></span>
             <span className="relative w-2 h-2 bg-[#002366] rounded-full block"></span>
         </div>
-        <span className="text-xs font-black uppercase tracking-[0.5em] text-[#002366]/60 leading-none">{children}</span>
+        <span className="text-xs font-black uppercase tracking-[0.5em] text-[#002366]/90 leading-none">{children}</span>
     </motion.div>
 );
 
@@ -67,7 +67,7 @@ const RevealText = ({ text, className = "", delay = 0 }) => {
     const isInView = useInView(ref, { once: true });
 
     return (
-        <span ref={ref} className={`inline-block ${className}`}>
+        <span ref={ref} className={`inline-block whitespace-nowrap ${className}`}>
             {letters.map((letter, i) => (
                 <span key={i} className="inline-block overflow-hidden pb-4 -mb-4">
                     <motion.span
@@ -101,6 +101,101 @@ const ScrollReveal = ({ children }) => {
     return (
         <motion.div ref={ref} style={{ opacity, scale }}>
             {children}
+        </motion.div>
+    );
+};
+
+const HeroContent = ({ theme }) => {
+    const isDark = theme === "dark";
+    const primaryColor = isDark ? "text-white" : "text-[#001233]";
+    const secondaryColor = isDark ? "text-white/90" : "text-[#002366]";
+    const mutedColor = isDark ? "text-white/30" : "text-dark/30";
+    const descriptionColor = isDark ? "text-white/80" : "text-dark/70";
+
+    return (
+        <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+            className="relative py-20"
+        >
+            {/* Top Accent */}
+            <motion.div variants={fadeInUp} className="mb-8 lg:mb-12 flex items-center gap-6">
+                <span className="h-[1px] w-20 bg-[#002366]" />
+                <span className={`text-[10px] font-black uppercase tracking-[0.8em] ${mutedColor}`}>
+                    Institutional Governance Alpha
+                </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <div className="relative mb-16 lg:mb-24">
+                <h1 className={`text-6xl md:text-[110px] lg:text-[180px] font-black leading-[0.85] tracking-tight ${primaryColor}`}>
+                    <div className="flex flex-col">
+                        <motion.span variants={fadeInUp} className="relative inline-block">
+                            Architecting
+                        </motion.span>
+                        <motion.span
+                            variants={fadeInUp}
+                            className={`relative inline-block italic font-serif font-normal text-[0.8em] lg:text-[0.9em] -mt-2 lg:-mt-4 lg:ml-[15%] ${secondaryColor}`}
+                        >
+                            Sovereign
+                        </motion.span>
+                        <motion.span variants={fadeInUp} className="relative inline-block self-end md:self-auto md:ml-auto lg:mr-[10%]">
+                            Futures.
+                        </motion.span>
+                    </div>
+                </h1>
+            </div>
+
+            {/* Bottom Info Arc */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+                <motion.div variants={fadeInUp} className="lg:col-span-5">
+                    <p className={`text-xl md:text-2xl ${descriptionColor} font-medium leading-relaxed font-secondary`}>
+                        We operate at the nexus of <span className="font-bold underline decoration-[#002366]/40 underline-offset-8">institutional stability</span> and regional opportunity, bridging global capital with high-growth entities.
+                    </p>
+
+                    <div className="mt-10 lg:mt-14 flex flex-col sm:flex-row items-center gap-12">
+                        <Magnetic>
+                            <Link href="/contact" className="group relative py-2">
+                                <span className={`text-[11px] font-black uppercase tracking-[0.5em] ${primaryColor}`}>Initialize Partnership</span>
+                                <div className={`h-[1px] w-full ${isDark ? 'bg-white/10' : 'bg-dark/10'} mt-3 relative overflow-hidden`}>
+                                    <motion.div
+                                        className="absolute inset-0 bg-[#002366]"
+                                        initial={{ x: "-100%" }}
+                                        whileHover={{ x: "0%" }}
+                                        transition={{ duration: 0.6 }}
+                                    />
+                                </div>
+                            </Link>
+                        </Magnetic>
+
+                        <Link href="/portfolio" className="group flex items-center gap-6">
+                            <span className={`text-[10px] font-black uppercase tracking-[0.5em] ${mutedColor} group-hover:${primaryColor} transition-colors`}>Explore Dossier</span>
+                            <div className={`w-10 h-10 rounded-full border ${isDark ? 'border-white/10' : 'border-dark/10'} flex items-center justify-center group-hover:bg-[#002366] group-hover:text-white group-hover:border-none transition-all duration-500`}>
+                                <span className="material-symbols-outlined text-sm">north_east</span>
+                            </div>
+                        </Link>
+                    </div>
+                </motion.div>
+
+                <motion.div variants={staggerContainer} className={`lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 border-t lg:border-t-0 lg:border-l ${isDark ? 'border-white/5' : 'border-dark/5'} lg:pl-16 pt-12 lg:pt-0`}>
+                    {[
+                        { val: 4, suffix: "+", label: "Sovereign Entities", desc: "Governance structures" },
+                        { val: 10000, suffix: "+", label: "Growth Optimization", desc: "Operational cycles" },
+                        { val: 1.2, suffix: "B+", label: "Capital Allocation", desc: "Institutional impact" }
+                    ].map((stat, i) => (
+                        <motion.div key={i} variants={fadeInUp} className="flex flex-col gap-2">
+                            <h4 className={`text-4xl lg:text-5xl font-black ${primaryColor} tracking-tighter`}>
+                                <Counter value={stat.val} />{stat.suffix}
+                            </h4>
+                            <div>
+                                <p className={`text-[9px] font-black uppercase tracking-[0.3em] ${isDark ? 'text-white/70' : 'text-dark/70'} mb-1`}>{stat.label}</p>
+                                <p className={`text-[8px] font-medium uppercase tracking-[0.1em] ${isDark ? 'text-white/20' : 'text-dark/20'}`}>{stat.desc}</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
         </motion.div>
     );
 };
@@ -222,56 +317,97 @@ const PortfolioItem = ({ item, index }) => {
 
 const FounderCard = ({ founder }) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: false, amount: 0.3 });
+    const isInView = useInView(ref, { once: false, amount: 0.1 });
 
     return (
         <motion.div
             ref={ref}
             variants={fadeInUp}
-            whileHover={{ y: -15 }}
-            className="group relative p-10 md:p-14 rounded-[40px] bg-white border border-dark/5 hover:border-[#002366]/30 hover:shadow-[0_60px_100px_-30px_rgba(37,99,235,0.1)] transition-all duration-1000 overflow-hidden"
+            className="group relative bg-white border border-dark/5 rounded-[48px] overflow-hidden hover:border-[#002366]/30 transition-all duration-1000 flex flex-col shadow-[0_40px_100px_-20px_rgba(0,18,51,0.04)] hover:shadow-[0_80px_160px_-40px_rgba(0,35,102,0.1)]"
         >
-            {/* Background Accent */}
-            <div className={`absolute top-0 right-0 w-96 h-96 bg-[#002366]/[0.03] rounded-full -translate-y-48 translate-x-48 blur-[100px] transition-all duration-1000 ${isInView ? 'scale-150' : 'scale-50 opacity-0'}`} />
+            {/* Top: Image Space */}
+            <div className="relative h-80 w-full bg-[#f8f9fa] overflow-hidden">
+                <Image
+                    src={founder.image}
+                    alt={founder.name}
+                    fill
+                    className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#002366]/40 via-transparent to-transparent opacity-60" />
 
-            <div className="relative z-10 flex flex-col h-full gap-12">
-                {/* Header Section */}
-                <div className="flex justify-between items-start gap-8">
-                    <div className="flex-grow">
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className="w-1.5 h-1.5 bg-[#002366] rounded-full" />
-                            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#002366]/60">Executive Lead</p>
+                {/* Executive Tier Badge */}
+                <div className="absolute top-8 left-8">
+                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 px-6 py-2 rounded-full">
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white underline decoration-[#002366] decoration-2 underline-offset-4">
+                            {founder.tier}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Profile Content */}
+            <div className="p-8 flex flex-col h-full">
+                <div>
+                    <div className="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 className="text-4xl lg:text-5xl font-black text-dark tracking-tighter leading-none mb-3">
+                                {founder.name}
+                            </h3>
+                            <p className="text-xs font-black uppercase tracking-[0.3em] text-[#002366]">
+                                {founder.role}
+                            </p>
                         </div>
-                        <motion.h4 className="text-3xl md:text-5xl font-black text-dark mb-2 tracking-tighter transition-colors group-hover:text-[#002366] leading-none">
-                            {founder.name}
-                        </motion.h4>
-                        <p className="text-xs font-black uppercase tracking-[0.3em] text-dark/30 italic">{founder.role}</p>
+                        {founder.logo && (
+                            <div className="w-16 h-16 rounded-2xl border border-dark/5 p-3 flex items-center justify-center bg-white shadow-xl group-hover:-translate-y-2 transition-transform duration-700">
+                                <Image src={founder.logo} alt="Company Logo" width={40} height={40} className="object-contain" unoptimized={true} />
+                            </div>
+                        )}
                     </div>
 
-                    {founder.logo && (
-                        <div className="w-16 h-16 bg-white rounded-2xl p-3 border border-dark/5 shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
-                            <Image src={founder.logo} alt={founder.name} width={40} height={40} className="object-contain" unoptimized={true} />
+                    <div className="flex flex-col gap-6">
+                        <div className="space-y-6">
+                            <div>
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mb-4">Operational Mandate</h4>
+                                <p className="text-xl font-semibold text-dark leading-tight italic border-l-3 border-[#002366] pl-6 py-1">
+                                    "{founder.philosophy}"
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mb-4">Strategic Vision</h4>
+                                <p className="text-base text-dark/70 font-medium leading-relaxed">
+                                    {founder.vision}
+                                </p>
+                            </div>
                         </div>
-                    )}
-                </div>
 
-                {/* Primary Philosophy Quote */}
-                <div className="relative pt-4">
-                    <span className="absolute -top-4 -left-4 text-8xl font-serif text-[#002366]/5 select-none font-black italic group-hover:text-[#002366]/10 transition-colors">“</span>
-                    <p className="text-lg md:text-xl font-medium text-dark/80 font-secondary leading-snug pl-6 border-l-2 border-[#002366]/20 group-hover:border-[#002366] transition-all duration-1000 ease-in-out py-2 italic">
-                        {founder.philosophy}
-                    </p>
-                </div>
+                        <div className="space-y-8">
+                            <div>
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mb-4">Core Focus</h4>
+                                <div className="p-6 bg-[#f0f7ff]/50 rounded-[32px] border border-[#002366]/5 group-hover:bg-[#002366]/5 transition-colors duration-700">
+                                    <p className="text-[13px] font-black text-dark uppercase tracking-wider leading-relaxed">
+                                        {founder.focus}
+                                    </p>
+                                </div>
+                            </div>
 
-                {/* Institutional Mandate Section */}
-                <div className="mt-auto pt-10 border-t border-dark/5">
-                    <div className="flex items-center gap-4 mb-5">
-                        <div className="h-[2px] w-14 bg-dark/10 group-hover:bg-[#002366]/40 group-hover:w-20 transition-all duration-1000" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-dark/20 group-hover:text-[#002366]/40 transition-colors whitespace-nowrap">Institutional Mandate</p>
+                            <div className="flex items-center gap-4">
+                                <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.4)] animate-pulse" />
+                                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-dark">Verified Institutional Lead</span>
+                            </div>
+                        </div>
                     </div>
-                    <p className="text-sm font-black text-dark/40 uppercase tracking-[0.2em] leading-relaxed group-hover:text-dark transition-colors duration-700">
-                        {founder.focus}
-                    </p>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-dark/5 flex items-center justify-between">
+                    <Magnetic>
+                        <Link href="/contact" className="group/btn flex items-center gap-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-dark">Connect</span>
+                            <div className="w-12 h-12 rounded-full border border-dark/10 flex items-center justify-center group-hover/btn:bg-[#002366] group-hover/btn:text-white group-hover/btn:border-none transition-all duration-700">
+                                <span className="material-symbols-outlined text-base">north_east</span>
+                            </div>
+                        </Link>
+                    </Magnetic>
                 </div>
             </div>
         </motion.div>
@@ -280,32 +416,44 @@ const FounderCard = ({ founder }) => {
 
 const founders = [
     {
+        tier: "Executive Tier 001",
         name: "Saurabh Jain",
         role: "Founder & CEO · Vega Vrudhi",
         philosophy: "Building on-ground execution intelligence via precision managed sales infrastructure.",
+        vision: "Architecting high-performance field-force efficiency through algorithmic sales fulfillment for national growth engines.",
         focus: "Strategic Retail Expansion & End-to-End Lead conversion fulfillment across India's Tier 1 and 2 cities.",
-        logo: "/VEGA.png"
+        logo: "/VEGA.png",
+        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop"
     },
     {
+        tier: "Executive Tier 002",
         name: "Dheeraj Anand",
         role: "Founder & CEO · BWorth",
         philosophy: "Redefining the value of waste through industrial-scale circular luxury fashion architecture.",
+        vision: "Re-imagining luxury fashion as a circular asset, creating a global movement towards zero-landfill conscious consumerism.",
         focus: "Circular Luxury Fashion, Ethical Upcycling Ecosystems & Sustainable Global Value Chain Integration.",
-        logo: "/BWORTH.jpg"
+        logo: "/BWORTH.jpg",
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2670&auto=format&fit=crop"
     },
     {
+        tier: "Executive Tier 003",
         name: "Yograj Rundhanker",
         role: "Founder & CEO · RYM Grenergy",
-        philosophy: "Harnessing deep-tech intelligence to solve critical energy challenges.",
+        philosophy: "Harnessing deep-tech intelligence to solve the world's most critical energy challenges.",
+        vision: "Enabling a carbon-neutral future by developing the world’s greenest battery cell and intelligent green-tech infrastructure.",
         focus: "Clean Energy, AI/ML-driven IoT Innovations & Smart Energy Automation Systems.",
-        logo: "https://rymgrenergy.com/images/logo.png"
+        logo: "https://rymgrenergy.com/images/logo.png",
+        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2574&auto=format&fit=crop"
     },
     {
+        tier: "Executive Tier 004",
         name: "Devam Srivastava",
         role: "Founder & CEO · Synchronous",
-        philosophy: "Scaling institutional legacies through the convergence of high-conversion engineering and aesthetics.",
+        philosophy: "Scaling institutional legacies through the convergence of high-conversion engineering and supreme aesthetics.",
+        vision: "Architecting high-velocity digital ecosystems for high-growth elite brands via algorithmic process automation.",
         focus: "Brand Identity Architecture, Autonomous AI Agents & Predictive Growth Modeling.",
-        logo: "/sync.jpg"
+        logo: "/sync.jpg",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop"
     }
 ];
 
@@ -313,33 +461,33 @@ const portfolioItems = [
     {
         title: "BWorth",
         img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop",
-        desc: "Revolutionizing the fashion industry through a unique circular luxury ecosystem. Buy, sell, and recycle fashion while earning rewards through our unique buyback program that preserves the planet's beauty.",
+        desc: "Orchestrating a systemic shift in the industrial value chain through a proprietary circular luxury ecosystem. We integrate end-to-end lifecycle management to preserve capital and environmental equity.",
         tag: "Circular Luxury",
-        tagline: "Sustainable Fashion Innovation Leader",
+        tagline: "Sovereign Industrial Value Chain",
         logo: "/BWORTH.jpg"
     },
     {
         title: "Vega Vrudhi",
         img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2670&auto=format&fit=crop",
-        desc: "Precision execution architecture bridging the gap between digital leads and on-ground reality. We deploy trained field teams to accelerate market presence for national growth engines.",
+        desc: "Deploying high-precision execution frameworks that bridge the divide between global strategic mandates and regional operational reality. We architect the backbone of national scale logistics.",
         tag: "Managed Sales",
-        tagline: "Precision Execution & Growth Architecture",
+        tagline: "Regional Execution Infrastructure",
         logo: "/VEGA.png"
     },
     {
         title: "RYM Grenergy",
         img: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2670&auto=format&fit=crop",
-        desc: "Enabling a carbon-neutral future by developing the world’s greenest battery cell and intelligent green-tech infrastructure through AI, IoT, and Smart Automation.",
+        desc: "Pioneering the next generation of energy sovereignty through advanced electrochemical storage solutions. Our vertically integrated AI-driven infrastructure ensures energy security for high-growth sectors.",
         tag: "Clean Energy",
-        tagline: "Intelligent Systems & Deep-Tech Engineering",
+        tagline: "Sovereign Energy Infrastructure",
         logo: "https://rymgrenergy.com/images/logo.png"
     },
     {
         title: "Synchronous",
         img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2670&auto=format&fit=crop",
-        desc: "Architecting high-velocity digital ecosystems for high-growth elite brands. We build vertically integrated brand identities and compound ROI via algorithmic process automation.",
+        desc: "Synthesizing brand identity with autonomous agent intelligence to create compound ROI for institutional-grade brands. We build the digital nexus where aesthetics meet algorithmic precision.",
         tag: "Autonomous AI",
-        tagline: "High-Performance Digital Marketing Group",
+        tagline: "Institutional Brand Architecture",
         logo: "/sync.jpg"
     },
 ];
@@ -361,126 +509,106 @@ export default function Home() {
             <Navbar />
 
             <main>
-                {/* 1. HERO SECTION - CINEMATIC ENTRANCE */}
-                <section className="relative h-screen flex items-center bg-[#fdfdfd] pt-16 overflow-hidden">
-                    <motion.div
-                        animate={{
-                            opacity: [0.1, 0.2, 0.1],
-                            scale: [1, 1.05, 1],
-                            rotate: [0, 1, 0]
-                        }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute inset-0 bg-[radial-gradient(circle_at_70%_-20%,#e0ebf5cc,transparent_50%)] pointer-events-none"
-                    />
+                {/* 1. HERO SECTION - REFINED WITH USER IMAGE */}
+                <section className="relative min-h-screen bg-[#FAF9F6] pt-36 pb-20 overflow-hidden">
+                    <div className="container-wide relative z-10">
+                        {/* Top Content Row: Designing for Impact */}
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-20">
 
-                    <div className="max-w-[1700px] mx-auto px-6 md:px-14 w-full relative z-10 h-full flex flex-col justify-center">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-
-                            {/* LEFT: IMAGE REVEAL & PARALLAX */}
-                            <motion.div
-                                variants={imageReveal}
-                                initial="initial"
-                                animate="animate"
-                                className="lg:col-span-7 relative flex justify-center py-2 perspective-1000"
-                            >
-                                <motion.div
-                                    whileHover={{ rotateY: 5, rotateX: -5 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="relative w-full max-w-[850px] aspect-[4/5] max-h-[50vh] md:max-h-[65vh] rounded-[32px] md:rounded-[60px] overflow-hidden shadow-[0_60px_100px_-30px_rgba(0,18,51,0.2)] bg-dark group preserve-3d"
+                            {/* Left: Massive Typography - Architecture of Scale */}
+                            <div className="lg:max-w-[900px]">
+                                <motion.h1
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                                    className="text-[64px] md:text-[110px] lg:text-[160px] font-black text-[#1A1A1A] leading-[0.8] tracking-[-0.04em]"
                                 >
-                                    <motion.div
-                                        initial={{ scale: 1.2 }}
-                                        animate={{ scale: 1 }}
-                                        transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-                                        className="absolute inset-0"
-                                    >
-                                        <Image
-                                            src="/hero-cityscape-v2.png"
-                                            alt="RiseMate Institutional HQ Design"
-                                            fill
-                                            sizes="(max-width: 1200px) 100vw, 50vw"
-                                            className="object-cover brightness-90 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
-                                            priority
-                                        />
-                                    </motion.div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent pointer-events-none" />
-                                </motion.div>
-                            </motion.div>
+                                    architecting <br />
+                                    <span className="text-[#002366]">sovereign</span> <br />
+                                    futures<span className="text-[#002366]">.</span>
+                                </motion.h1>
+                            </div>
 
-                            {/* RIGHT: TYPOGRAPHY PERFECTION */}
+                            {/* Right: Institutional Intelligence Box */}
                             <motion.div
-                                variants={staggerContainer}
-                                initial="initial"
-                                animate="animate"
-                                className="lg:col-span-5 relative w-full py-2"
+                                initial={{ opacity: 0, y: 60 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                                className="lg:max-w-[360px] pt-8"
                             >
-                                <motion.div variants={fadeInUp} className="mb-4">
-                                    <div className="flex items-center gap-4 mb-4 overflow-hidden">
-                                        <motion.div
-                                            initial={{ x: -100 }}
-                                            animate={{ x: 0 }}
-                                            transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                                            className="h-[2px] w-12 bg-[#002366]"
-                                        />
-                                        <RevealText
-                                            text="Sovereign Industrial Brand"
-                                            className="text-xs font-black uppercase tracking-[0.6em] text-[#002366]/80"
-                                            delay={0.4}
-                                        />
+                                <div className="flex gap-10 mb-14 hidden md:flex border-b border-dark/5 pb-2">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-dark">Institutional Pulse</span>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/20 hover:text-dark transition-all cursor-pointer">Live Metrics</span>
+                                </div>
+
+                                <div className="space-y-8">
+                                    {/* Partner Avatars & Social Proof */}
+                                    <div className="flex items-center gap-6">
+                                        <div className="flex items-center -space-x-4">
+                                            {[1, 2, 3].map((i) => (
+                                                <div key={i} className="w-14 h-14 rounded-full border-4 border-[#FAF9F6] overflow-hidden bg-gray-100 shadow-2xl relative">
+                                                    <Image src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="Partner" fill className="object-cover" />
+                                                </div>
+                                            ))}
+                                            <div className="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#FAF9F6] bg-dark text-white text-[12px] font-black shadow-2xl z-10">
+                                                +4
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-2xl font-black text-dark tracking-tighter leading-none">+1.2B</p>
+                                            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-dark/40 mt-1">Capital Managed</p>
+                                        </div>
                                     </div>
 
-                                    <h1 className="text-4xl md:text-6xl lg:text-[100px] font-black text-dark mb-6 leading-[0.95] tracking-tighter">
-                                        <RevealText text="Building our" delay={0.5} /> <br />
-                                        <RevealText text="Legacy." delay={0.8} />
-                                    </h1>
-
-                                    <motion.p
-                                        variants={fadeInUp}
-                                        className="text-sm md:text-base text-dark/40 font-medium leading-relaxed font-secondary max-w-lg mb-6"
-                                    >
-                                        We operate at the nexus of <span className="text-[#002366]">institutional stability</span> and regional opportunity, bridging global capital with high-growth entities to secure your <span className="text-dark font-black">sovereign industrial future</span>.
-                                    </motion.p>
-
-                                    <motion.div variants={fadeInUp} className="flex flex-wrap gap-6 items-center">
-                                        <Magnetic>
-                                            <Link href="/contact" className="group relative inline-flex items-center bg-[#002366] text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.4em] overflow-hidden transition-all duration-700 hover:scale-105 shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)]">
-                                                <span className="relative z-10">Become A Partner</span>
-                                                <div className="absolute inset-0 bg-dark translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out" />
-                                            </Link>
-                                        </Magnetic>
-                                        <Link href="/portfolio" className="group text-[10px] font-black uppercase tracking-[0.3em] text-dark flex items-center gap-2 hover:gap-4 transition-all duration-500">
-                                            <span>Explore</span>
-                                            <div className="w-8 h-8 rounded-full border border-dark/10 flex items-center justify-center group-hover:bg-[#002366] group-hover:text-white transition-all duration-500">
-                                                <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                                            </div>
-                                        </Link>
-                                    </motion.div>
-                                </motion.div>
-
-                                {/* STAGGERED STATS */}
-                                <motion.div
-                                    variants={staggerContainer}
-                                    className="grid grid-cols-2 gap-4 w-full pt-4 border-t border-dark/5"
-                                >
-                                    {[
-                                        { val: 4, suffix: "+", label: "Sovereign Entities", color: "bg-[#e0ebf5]", text: "text-[#003380]" },
-                                        { val: 10000, suffix: "+", label: "Growth Impact", color: "bg-[#fde8d8]", text: "text-dark" }
-                                    ].map((stat, i) => (
-                                        <motion.div
-                                            key={i}
-                                            variants={fadeInUp}
-                                            className={`p-4 ${stat.color} rounded-[20px] border border-white/50 backdrop-blur-xl shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 group`}
-                                        >
-                                            <h4 className={`text-xl md:text-2xl font-black ${stat.text} mb-1 tracking-tighter`}>
-                                                <Counter value={stat.val} />{stat.suffix}
-                                            </h4>
-                                            <p className="text-[8px] font-black text-dark/30 uppercase tracking-[0.2em] leading-none group-hover:text-dark/60 transition-colors">{stat.label}</p>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
+                                    <p className="text-[15px] text-dark/70 font-medium leading-relaxed max-w-sm">
+                                        Operating at the nexus of <span className="text-dark font-bold underline decoration-[#002366]/30 underline-offset-4">institutional stability</span> and regional opportunity, bridging global capital with high-growth entities.
+                                    </p>
+                                </div>
                             </motion.div>
                         </div>
+
+                        {/* Immersive Landscape Reveal */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 100 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                            className="relative w-full aspect-[21/9] md:aspect-[16/7] rounded-[48px] lg:rounded-[100px] overflow-hidden shadow-[0_120px_200px_-60px_rgba(37,99,235,0.12)] group"
+                        >
+                            <Image
+                                src="/beautiful-city-landscape-with-tall-buildings.jpg"
+                                alt="Sovereign Industrial Cityscape"
+                                fill
+                                className="object-cover scale-105 group-hover:scale-110 transition-transform duration-[8s] ease-out"
+                                priority
+                            />
+
+                            {/* Cinematic Design Overlays */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-1000" />
+                            <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[48px] lg:rounded-[100px]" />
+
+                            {/* High-Impact Metric Strip */}
+                            <div className="absolute bottom-12 left-0 right-0 px-12 flex flex-wrap justify-between items-center gap-10">
+                                {[
+                                    { val: 4, suffix: "+", label: "Sovereign Partners" },
+                                    { val: 1.2, suffix: "B+", label: "Capital Allocated" },
+                                    { val: 100, suffix: "%", label: "Industrial Integrity" }
+                                ].map((stat, i) => (
+                                    <div key={i} className="flex items-center gap-5 bg-white/5 backdrop-blur-2xl px-8 py-5 rounded-[32px] border border-white/10 hover:bg-white/10 transition-colors duration-500">
+                                        <span className="text-4xl font-black text-white tracking-tighter">
+                                            <Counter value={stat.val} />{stat.suffix}
+                                        </span>
+                                        <div className="h-8 w-[1px] bg-white/20" />
+                                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/80 leading-none">
+                                            {stat.label}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
+
+                    {/* Architectural Ambient Blur */}
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-[#002366]/5 blur-[200px] -translate-y-1/2 rounded-full pointer-events-none" />
                 </section>
 
                 {/* 2. ABOUT SECTION - SCROLL LIQUIDITY */}
@@ -584,75 +712,96 @@ export default function Home() {
                     </section>
                 </ScrollReveal>
 
-                {/* 3. CORE VALUES - REFINED STACKS */}
+                {/* 3. CORE VALUES - ARCHITECTURAL REDESIGN */}
                 <ScrollReveal>
-                    <section className="py-8 md:py-16 bg-[#f8f9fa] relative overflow-hidden">
+                    <section className="py-24 md:py-32 bg-[#FAF9F6] relative overflow-hidden">
+                        {/* Background Infrastructure */}
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-dark/5" />
+                        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-dark/5" />
+
                         <div className="container-wide relative z-10">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-end mb-24">
                                 <motion.div
                                     variants={sectionAnimation}
                                     initial="initial"
                                     whileInView="whileInView"
-                                    className="lg:col-span-12"
+                                    className="lg:col-span-8"
                                 >
-                                    <div className="flex flex-col md:flex-row gap-8 items-end mb-8">
-                                        <div className="md:w-3/5">
-                                            <SectionLabel>Core Principles</SectionLabel>
-                                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-dark leading-[1.1] tracking-tight">
-                                                Elevating <span className="text-[#002366] font-normal italic font-serif">Global</span> Standards
-                                            </h2>
-                                        </div>
-                                        <div className="md:w-2/5">
-                                            <p className="text-lg text-dark/40 font-secondary leading-tight italic border-l-4 border-[#002366]/30 pl-6">
-                                                "We combine deep market expertise with a commitment to sustainable value creation."
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <SectionLabel>Institutional Foundation</SectionLabel>
+                                    <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-dark leading-[0.95] tracking-tight">
+                                        elevating <br />
+                                        <span className="text-[#002366]">global</span> standards<span className="text-[#002366]">.</span>
+                                    </h2>
                                 </motion.div>
+                                <motion.div
+                                    variants={fadeInUp}
+                                    className="lg:col-span-4 pb-4"
+                                >
+                                    <p className="text-xl md:text-2xl text-dark/70 font-semibold leading-relaxed border-l-4 border-[#002366] pl-10 italic">
+                                        "We combine deep market expertise with a commitment to sustainable value creation."
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                                <div className="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                    {[
-                                        {
-                                            title: "Our Vision",
-                                            icon: "token",
-                                            color: "text-[#002366]",
-                                            bg: "bg-[#f0f7ff]/50 hover:bg-[#002366] hover:text-white",
-                                            desc: "To be the definitive bridge between global investors and India's dynamic growth sectors, setting new benchmarks for transparency and institutional performance."
-                                        },
-                                        {
-                                            title: "Our Mission",
-                                            icon: "account_tree",
-                                            color: "text-gold",
-                                            bg: "bg-[#fde8d8]/50 hover:bg-dark hover:text-white",
-                                            desc: "Empowering businesses through ethical investment practices, autonomous vertical integration, and a relentless focus on long-term capital appreciation."
-                                        }
-                                    ].map((card, i) => (
-                                        <motion.div
-                                            key={i}
-                                            variants={sectionAnimation}
-                                            initial="initial"
-                                            whileInView="whileInView"
-                                            viewport={{ amount: 0.5 }}
-                                            className={`group p-8 md:p-10 bg-white rounded-[32px] border border-dark/5 transition-all duration-1000 ease-in-out hover:shadow-[0_40px_80px_-20px_rgba(0,18,51,0.05)]`}
-                                        >
-                                            <div className="flex flex-col gap-6">
-                                                <div className={`w-14 h-14 rounded-[16px] flex items-center justify-center transition-all duration-700 bg-dark text-white group-hover:scale-110 group-hover:rotate-6`}>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                                {[
+                                    {
+                                        title: "Our Vision",
+                                        subtitle: "The Definitive Bridge",
+                                        icon: "token",
+                                        num: "01",
+                                        desc: "To be the definitive bridge between global investors and India's dynamic growth sectors, setting new benchmarks for transparency and institutional performance."
+                                    },
+                                    {
+                                        title: "Our Mission",
+                                        subtitle: "Ethical Empowerment",
+                                        icon: "account_tree",
+                                        num: "02",
+                                        desc: "Empowering businesses through ethical investment practices, autonomous vertical integration, and a relentless focus on long-term capital appreciation."
+                                    }
+                                ].map((card, i) => (
+                                    <motion.div
+                                        key={i}
+                                        variants={sectionAnimation}
+                                        initial="initial"
+                                        whileInView="whileInView"
+                                        whileHover={{ y: -10 }}
+                                        className="group relative p-12 lg:p-16 bg-white rounded-[40px] md:rounded-[60px] border border-dark/5 hover:border-[#002366]/30 hover:shadow-[0_80px_120px_-30px_rgba(232,126,67,0.08)] transition-all duration-1000 overflow-hidden"
+                                    >
+                                        {/* Card Background Number */}
+                                        <div className="absolute top-10 right-10 text-[120px] md:text-[200px] font-black text-dark/[0.03] leading-none transition-all duration-1000 group-hover:text-[#002366]/[0.05] group-hover:scale-110 pointer-events-none">
+                                            {card.num}
+                                        </div>
+
+                                        <div className="relative z-10 flex flex-col h-full gap-10">
+                                            <div className="flex items-center gap-6">
+                                                <div className="w-16 h-16 rounded-2xl bg-dark text-white flex items-center justify-center group-hover:bg-[#002366] transition-colors duration-700">
                                                     <span className="material-symbols-outlined text-3xl">{card.icon}</span>
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-xl font-black text-dark mb-2 tracking-tighter">{card.title}</h3>
-                                                    <p className="text-base text-dark/30 font-secondary leading-tight italic transition-colors duration-700 group-hover:text-dark/80">
-                                                        "{card.desc}"
-                                                    </p>
-                                                </div>
-                                                <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-1000 translate-x-10 group-hover:translate-x-0">
-                                                    <div className="h-[2px] w-10 bg-[#002366]" />
-                                                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#002366]">Institutional Mandate</span>
+                                                    <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-[#002366] mb-1">{card.subtitle}</h3>
+                                                    <p className="text-3xl font-black text-dark tracking-tighter">{card.title}</p>
                                                 </div>
                                             </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
+
+                                            <div className="max-w-md">
+                                                <p className="text-xl md:text-2xl text-dark/30 font-semibold font-secondary leading-snug group-hover:text-dark/80 transition-colors duration-700">
+                                                    "{card.desc}"
+                                                </p>
+                                            </div>
+
+                                            <div className="mt-auto pt-10 border-t border-dark/5 flex items-center justify-between">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="h-[2px] w-12 bg-dark/10 group-hover:bg-[#002366] group-hover:w-20 transition-all duration-1000" />
+                                                    <span className="text-[9px] font-black uppercase tracking-[0.5em] text-dark/40 group-hover:text-dark transition-colors">Institutional Mandate</span>
+                                                </div>
+                                                <div className="w-10 h-10 rounded-full border border-dark/5 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-700">
+                                                    <span className="material-symbols-outlined text-sm">north_east</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </div>
                     </section>
@@ -669,13 +818,13 @@ export default function Home() {
                                 className="flex flex-col md:flex-row justify-between items-end mb-8 lg:mb-12"
                             >
                                 <div className="max-w-4xl">
-                                    <SectionLabel>Executive Governance</SectionLabel>
+                                    <SectionLabel>Registry Governance</SectionLabel>
                                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-dark leading-[1.1] tracking-tight">
-                                        Architects <br />of the <span className="text-[#002366] font-normal italic font-serif">Future</span>
+                                        Institutional <br /><span className="text-[#002366] font-normal italic font-serif">Architects</span>.
                                     </h2>
                                 </div>
-                                <p className="text-xl text-dark/30 font-secondary mt-8 md:mt-0 max-w-xs md:text-right italic">
-                                    Driving institutional excellence through visionary leadership across four sovereign entities.
+                                <p className="text-xl text-dark/30 font-secondary mt-8 md:mt-0 max-w-sm md:text-right italic">
+                                    The executive governance behind RiseMate Venture. Each leader operates at the nexus of institutional stability and regional opportunity.
                                 </p>
                             </motion.div>
 
@@ -683,7 +832,7 @@ export default function Home() {
                                 variants={staggerContainer}
                                 initial="initial"
                                 whileInView="animate"
-                                className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto"
+                                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 max-w-7xl mx-auto"
                             >
                                 {founders.map((founder, idx) => (
                                     <FounderCard key={idx} founder={founder} />
@@ -718,38 +867,7 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            {/* Sovereign Brand Banner */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="bg-white border border-dark/5 p-6 md:p-10 rounded-[32px] md:rounded-[48px] mb-12 shadow-[0_40px_100px_-20px_rgba(0,18,51,0.08)] flex flex-col md:flex-row items-center justify-between gap-8 group overflow-hidden relative"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#002366]/[0.03] to-transparent pointer-events-none" />
-                                <div className="flex items-center gap-8 relative z-10">
-                                    <Link href="/" className="relative w-40 h-10 grayscale group-hover:grayscale-0 transition-all duration-1000">
-                                        <Image src="/logo.png" alt="RiseMate Venture" fill className="object-contain object-left" />
-                                    </Link>
-                                    <div className="h-8 w-[1px] bg-dark/10 hidden md:block" />
-                                    <div className="flex flex-col">
-                                        <p className="text-[9px] font-black uppercase tracking-[0.5em] text-[#002366] leading-tight mb-1">RiseMate Venture</p>
-                                        <p className="text-[9px] font-black uppercase tracking-[0.5em] text-dark/30 leading-tight">Overarching Sovereign Entity</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-8 relative z-10">
-                                    <div className="hidden lg:flex gap-3">
-                                        {[1, 2, 3, 4].map((i) => (
-                                            <div key={i} className="w-1.5 h-1.5 bg-[#002366] rounded-full animate-pulse" style={{ animationDelay: `${i * 200}ms` }} />
-                                        ))}
-                                    </div>
-                                    <Magnetic>
-                                        <Link href="/portfolio" className="text-[9px] font-black uppercase tracking-[0.4em] text-[#002366] bg-[#f0f7ff] px-8 py-4 rounded-full hover:bg-dark hover:text-white transition-all duration-700">
-                                            Sovereign Directory
-                                        </Link>
-                                    </Magnetic>
-                                </div>
-                            </motion.div>
+
 
                             {/* Portfolio List with extreme scroll depth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto">
@@ -763,32 +881,105 @@ export default function Home() {
 
                 <ParallaxMarquee text="Institutional Excellence · Strategic Allocation · Sovereign Growth · " direction="left" />
 
-                {/* 6. CTA SECTION - LIGHT INTEGRATION */}
-                <section className="py-8 md:py-16 bg-white text-dark overflow-hidden relative border-t border-dark/5">
-                    <div className="container-wide relative z-10 text-center">
-                        <motion.div
-                            variants={sectionAnimation}
-                            initial="initial"
-                            whileInView="whileInView"
-                        >
-                            <SectionLabel>Nexus Collective</SectionLabel>
-                            <h2 className="text-4xl md:text-7xl lg:text-[100px] font-black mb-12 tracking-tight leading-[1.1]">
-                                Ready to build <br /> the <span className="text-[#002366] font-normal italic font-serif">Nexus?</span>
-                            </h2>
-                            <p className="text-xl md:text-2xl text-dark/30 font-secondary max-w-2xl mx-auto mb-16 px-6 leading-tight">
-                                Join a circle of institutional excellence and high-velocity growth in India's leading economic hubs.
-                            </p>
-
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                                <Link href="/contact" className="group relative bg-dark text-white px-16 py-6 rounded-[32px] text-xs font-black uppercase tracking-[0.5em] overflow-hidden transition-all duration-700 hover:scale-110 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]">
-                                    <span className="relative z-10">Initialize Partnership</span>
-                                    <div className="absolute inset-0 bg-[#002366] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out" />
-                                </Link>
-                                <Link href="/about" className="group bg-dark/5 backdrop-blur-xl border border-dark/10 text-dark px-16 py-6 rounded-[32px] text-xs font-black uppercase tracking-[0.5em] hover:bg-dark hover:text-white transition-all duration-1000">
-                                    Institutional Dossier
-                                </Link>
+                {/* 6. NEXUS COLLECTIVE - INSTITUTIONAL CONNECTION */}
+                <section className="py-24 bg-white overflow-hidden relative border-t border-dark/5">
+                    <div className="container-wide relative z-10">
+                        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
+                            <div className="max-w-3xl">
+                                <SectionLabel>Initialize Connection</SectionLabel>
+                                <h2 className="text-5xl md:text-8xl font-black text-dark tracking-tighter leading-[0.9] mb-8">
+                                    Nexus <br /><span className="text-[#002366] italic font-serif font-normal">Collective.</span>
+                                </h2>
+                                <p className="text-xl md:text-2xl text-dark/40 font-secondary leading-tight italic border-l-3 border-[#002366] pl-8">
+                                    Bridge the gap between institutional expertise and your sovereign growth. Our global operations are active across all regional hubs.
+                                </p>
                             </div>
-                        </motion.div>
+                        </div>
+
+                        {/* Entity Matrix */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+                            {[
+                                { 
+                                    name: "BWorth Support", icon: "eco", 
+                                    email: "info@bworth.co.in", phone: "+91 8826668050",
+                                    ref: "Industrial Synthesis"
+                                },
+                                { 
+                                    name: "Vega Vrudhi", icon: "precision_manufacturing", 
+                                    email: "saurabh@vegavruddhi.com", phone: "+91 91166 16636",
+                                    ref: "Execution Framework"
+                                },
+                                { 
+                                    name: "RYM Grenergy", icon: "bolt", 
+                                    email: "contact@rym-grenergy.com", phone: "+91 82000 55645",
+                                    ref: "Energy Sovereignty"
+                                },
+                                { 
+                                    name: "Synchronous", icon: "hub", 
+                                    email: "ops@synchronous.digital", phone: "Global",
+                                    ref: "Digital Architecture"
+                                }
+                            ].map((entity, i) => (
+                                <motion.div
+                                    key={i}
+                                    variants={fadeInUp}
+                                    whileHover={{ y: -10 }}
+                                    className="group p-10 bg-[#f8faff] rounded-[40px] border border-[#002366]/5 hover:border-[#002366]/20 transition-all duration-700"
+                                >
+                                    <div className="w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center mb-10 group-hover:bg-[#002366] group-hover:text-white transition-all duration-700">
+                                        <span className="material-symbols-outlined text-2xl">{entity.icon}</span>
+                                    </div>
+                                    <div className="mb-8">
+                                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#002366]/40 mb-2">{entity.ref}</p>
+                                        <h3 className="text-2xl font-black text-dark tracking-tight">{entity.name}</h3>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <p className="text-sm font-bold text-dark/60 hover:text-[#002366] transition-colors">{entity.email}</p>
+                                        <p className="text-xs font-black uppercase tracking-widest text-[#002366]">{entity.phone}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Hub Infrastructure */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            {[
+                                {
+                                    type: "Global Headquarters",
+                                    label: "Institutional NCR",
+                                    city: "Gurugram",
+                                    address: "7th Floor, Spaze Plazo, Golf Course Ext. Road Sector – 69.",
+                                    ref: "Operational Ref: HQ_SYNC_2026"
+                                },
+                                {
+                                    type: "Main Hub Operations",
+                                    label: "Royal Heritage Hub",
+                                    city: "Jaipur",
+                                    address: "Vinayak Enclave, Jagatpura.",
+                                    ref: "Satellite Office Strategy Hub"
+                                }
+                            ].map((hub, i) => (
+                                <div key={i} className="relative p-12 bg-white rounded-[56px] border border-dark/5 overflow-hidden group">
+                                    <div className="absolute top-0 right-0 p-12 text-[100px] font-black text-dark/[0.02] leading-none pointer-events-none group-hover:text-[#002366]/[0.05] transition-all duration-1000">
+                                        {hub.city === "Gurugram" ? "NCR" : "RP"}
+                                    </div>
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <span className="text-[10px] font-black uppercase tracking-[0.6em] text-[#002366] bg-[#002366]/5 px-4 py-2 rounded-full">{hub.type}</span>
+                                        </div>
+                                        <h4 className="text-4xl font-black text-dark mb-2 tracking-tighter">{hub.label}</h4>
+                                        <p className="text-2xl font-black text-[#002366] mb-8">{hub.city}</p>
+                                        <div className="h-[1px] w-full bg-dark/5 mb-8" />
+                                        <p className="text-xl text-dark/50 font-secondary leading-relaxed max-w-sm mb-12">
+                                            {hub.address}
+                                        </p>
+                                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 italic">
+                                            {hub.ref}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
 

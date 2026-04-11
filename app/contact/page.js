@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Image from "next/image";
+import Link from "next/link";
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -12,52 +12,71 @@ const fadeInUp = {
     transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
 };
 
-const ContactCard = ({ title, email, phone, icon }) => (
+const ContactCard = ({ title, email, phone, icon, refLabel }) => (
     <motion.div 
         variants={fadeInUp}
         initial="initial"
         whileInView="whileInView"
-        className="p-10 bg-white border border-dark/5 rounded-[40px] hover:shadow-2xl transition-all duration-700 group"
+        className="p-10 bg-white border border-dark/5 rounded-[40px] hover:border-[#002366]/20 hover:shadow-[0_40px_80px_-20px_rgba(0,35,102,0.05)] transition-all duration-700 group"
     >
-        <div className="w-12 h-12 bg-blue-600/5 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-700">
-            <span className="material-symbols-outlined">{icon}</span>
+        <div className="w-14 h-14 bg-[#002366]/5 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-[#002366] group-hover:text-white transition-all duration-700">
+            <span className="material-symbols-outlined text-2xl">{icon}</span>
         </div>
-        <h3 className="text-xl font-black text-dark mb-6 tracking-tight uppercase tracking-widest">{title}</h3>
-        <div className="space-y-4">
-            <a href={`mailto:${email}`} className="block text-sm font-secondary text-dark/60 hover:text-blue-600 transition-colors">{email}</a>
-            {phone && <a href={`tel:${phone.replace(/\s+/g, '')}`} className="block text-sm font-secondary text-dark/60 hover:text-blue-600 transition-colors">{phone}</a>}
+        <div className="mb-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#002366]/40 mb-2">{refLabel}</p>
+            <h3 className="text-2xl font-black text-dark tracking-tight">{title}</h3>
+        </div>
+        <div className="space-y-3">
+            <a href={`mailto:${email}`} className="block text-sm font-bold text-dark/60 hover:text-[#002366] transition-colors">{email}</a>
+            {phone && (
+                <p className="text-xs font-black uppercase tracking-widest text-[#002366]">{phone}</p>
+            )}
         </div>
     </motion.div>
 );
 
 export default function Contact() {
     return (
-        <div className="bg-[#fdfdfd] min-h-screen selection:bg-blue-600 selection:text-white">
+        <div className="bg-[#FAF9F6] min-h-screen selection:bg-[#002366] selection:text-white overflow-x-hidden">
             <Navbar />
 
             <main className="pt-24">
-                {/* HERO */}
-                <section className="py-20 md:py-32 px-6 md:px-24 border-b border-dark/5">
-                    <div className="max-w-screen-2xl mx-auto">
+                {/* HERO - INSTITUTIONAL HEADER */}
+                <section className="relative py-24 md:py-40 px-6 md:px-24 overflow-hidden">
+                    {/* Background elements */}
+                    <div className="absolute inset-0 grid grid-cols-12 opacity-[0.03] pointer-events-none">
+                        {[...Array(12)].map((_, i) => (
+                            <div key={i} className="border-r border-dark h-full"></div>
+                        ))}
+                    </div>
+
+                    <div className="max-w-screen-2xl mx-auto relative z-10">
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 60 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <span className="text-xs font-black uppercase tracking-[0.6em] text-blue-600 mb-8 block">Initialize Connection</span>
-                            <h1 className="text-6xl md:text-[10rem] font-black leading-[0.85] text-dark tracking-tighter mb-12">
+                            <div className="flex items-center gap-4 mb-12">
+                                <span className="w-12 h-[1px] bg-[#002366]/30"></span>
+                                <span className="text-xs font-black uppercase tracking-[0.6em] text-[#002366]">Initialize Connection</span>
+                            </div>
+                            
+                            <h1 className="text-6xl md:text-[12rem] font-black leading-[0.8] text-dark tracking-tighter mb-16">
                                 Nexus <br />
-                                <span className="text-dark/20 italic">Collective.</span>
+                                <span className="text-[#002366] italic font-serif font-normal">Collective.</span>
                             </h1>
-                            <p className="text-xl md:text-3xl text-dark/40 font-secondary max-w-4xl border-l-4 border-blue-600/20 pl-12 py-4 italic">
-                                Bridge the gap between institutional expertise and your sovereign growth. Our global operations are active across all regional hubs.
-                            </p>
+                            
+                            <div className="max-w-3xl border-l-3 border-[#002366] pl-12 py-4">
+                                <p className="text-xl md:text-2xl text-dark/40 font-secondary leading-tight italic">
+                                    Bridge the gap between institutional expertise and your sovereign growth. Our global operations are active across all regional hubs.
+                                </p>
+                            </div>
                         </motion.div>
                     </div>
                 </section>
 
-                {/* CONTACT GRID */}
-                <section className="py-24 px-6 md:px-24">
+                {/* ENTITY MATRIX */}
+                <section className="py-24 px-6 md:px-24 bg-white relative">
                     <div className="max-w-screen-2xl mx-auto">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             <ContactCard 
@@ -65,102 +84,126 @@ export default function Contact() {
                                 email="info@bworth.co.in" 
                                 phone="+91 8826668050" 
                                 icon="eco"
+                                refLabel="Industrial Synthesis"
                             />
                             <ContactCard 
                                 title="Vega Vrudhi" 
                                 email="saurabh@vegavruddhi.com" 
                                 phone="+91 91166 16636" 
                                 icon="precision_manufacturing"
+                                refLabel="Execution Framework"
                             />
                             <ContactCard 
                                 title="RYM Grenergy" 
                                 email="contact@rym-grenergy.com" 
                                 phone="+91 82000 55645" 
                                 icon="bolt"
+                                refLabel="Energy Sovereignty"
                             />
                             <ContactCard 
                                 title="Synchronous" 
                                 email="ops@synchronous.digital" 
+                                phone="Global Access"
                                 icon="hub"
+                                refLabel="Digital Architecture"
                             />
                         </div>
                     </div>
                 </section>
 
-                {/* LOCATIONS */}
-                <section className="py-24 bg-white px-6 md:px-24">
-                    <div className="max-w-screen-2xl mx-auto">
+                {/* HUB INFRASTRUCTURE */}
+                <section className="py-32 bg-[#f8faff] px-6 md:px-24 relative overflow-hidden">
+                    <div className="max-w-screen-2xl mx-auto relative z-10">
                         <motion.div 
                             variants={fadeInUp}
                             initial="initial"
                             whileInView="whileInView"
-                            className="flex flex-col md:flex-row justify-between items-end mb-24"
+                            className="flex flex-col md:flex-row justify-between items-end mb-32"
                         >
-                            <h2 className="text-4xl md:text-7xl font-black text-dark tracking-tighter">Global <br /> Headquarters</h2>
-                            <div className="h-[1px] flex-grow bg-dark/5 mx-12 hidden md:block" />
-                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mt-6 md:mt-0">Operational Ref: HQ_SYNC_2026</p>
+                            <div className="max-w-xl">
+                                <span className="text-[10px] font-black uppercase tracking-[0.6em] text-[#002366] mb-6 block">Physical Infrastructure</span>
+                                <h2 className="text-4xl md:text-8xl font-black text-dark tracking-tighter leading-none">Global <br /> Hubs.</h2>
+                            </div>
+                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mt-12 md:mt-0 italic">Operational Ref: HQ_SYNC_2026</p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <motion.div 
-                                variants={fadeInUp}
-                                initial="initial"
-                                whileInView="whileInView"
-                                className="group p-16 bg-[#f8f9fa] rounded-[60px] relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-all duration-1000" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.6em] text-blue-600 mb-10 block">Institutional NCR</span>
-                                <h3 className="text-4xl md:text-5xl font-black text-dark mb-8">Gurugram</h3>
-                                <p className="text-xl text-dark/60 font-secondary leading-relaxed mb-12">
-                                    7th Floor, Spaze Plazo, <br />
-                                    Golf Course Ext. Road Sector – 69.
-                                </p>
-                                <div className="flex gap-4">
-                                    <span className="px-4 py-2 bg-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-dark/5">Main Hub</span>
-                                    <span className="px-4 py-2 bg-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-dark/5">Operations</span>
-                                </div>
-                            </motion.div>
-
-                            <motion.div 
-                                variants={fadeInUp}
-                                initial="initial"
-                                whileInView="whileInView"
-                                className="group p-16 bg-[#f8f9fa] rounded-[60px] relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-all duration-1000" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.6em] text-gold mb-10 block">Royal Heritage Hub</span>
-                                <h3 className="text-4xl md:text-5xl font-black text-dark mb-8">Jaipur</h3>
-                                <p className="text-xl text-dark/60 font-secondary leading-relaxed mb-12">
-                                    Vinayak Enclave, <br />
-                                    Jagatpura.
-                                </p>
-                                <div className="flex gap-4">
-                                    <span className="px-4 py-2 bg-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-dark/5">Satellite Office</span>
-                                    <span className="px-4 py-2 bg-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-dark/5">Strategy Hub</span>
-                                </div>
-                            </motion.div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            {[
+                                {
+                                    type: "Global Headquarters",
+                                    label: "Institutional NCR",
+                                    city: "Gurugram",
+                                    address: "7th Floor, Spaze Plazo, Golf Course Ext. Road Sector – 69.",
+                                    ref: "HQ_SYNC_2026",
+                                    code: "NCR"
+                                },
+                                {
+                                    type: "Main Hub Operations",
+                                    label: "Royal Heritage Hub",
+                                    city: "Jaipur",
+                                    address: "Vinayak Enclave, Jagatpura.",
+                                    ref: "Satellite Office Strategy Hub",
+                                    code: "RJ"
+                                }
+                            ].map((hub, i) => (
+                                <motion.div 
+                                    key={i}
+                                    variants={fadeInUp}
+                                    initial="initial"
+                                    whileInView="whileInView"
+                                    className="group relative p-16 bg-white rounded-[64px] border border-[#002366]/5 overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.02)]"
+                                >
+                                    <div className="absolute top-0 right-0 p-16 text-[150px] font-black text-[#002366]/[0.02] leading-none pointer-events-none group-hover:text-[#002366]/[0.05] transition-all duration-1000">
+                                        {hub.code}
+                                    </div>
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-4 mb-10">
+                                            <span className="text-[10px] font-black uppercase tracking-[0.6em] text-[#002366] bg-[#002366]/5 px-5 py-2.5 rounded-full">{hub.type}</span>
+                                        </div>
+                                        <h4 className="text-4xl font-black text-dark mb-2 tracking-tighter">{hub.label}</h4>
+                                        <p className="text-2xl font-black text-[#002366] mb-10">{hub.city}</p>
+                                        <div className="h-[1px] w-full bg-dark/5 mb-10" />
+                                        <p className="text-2xl text-dark/40 font-secondary leading-tight max-w-sm mb-16">
+                                            {hub.address}
+                                        </p>
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-2 h-2 rounded-full bg-[#002366]"></div>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/20 uppercase tracking-[0.4em]">
+                                                {hub.ref}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                {/* FORM SECTION (Optional Placeholder) */}
-                <section className="py-24 bg-dark text-white overflow-hidden relative">
+                {/* HIGH-FIDELITY MANDATE PORTAL */}
+                <section className="py-40 bg-[#001233] text-white relative overflow-hidden">
+                    {/* Cinematic background noise/grain */}
+                    <div className="absolute inset-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
+                    
                     <div className="container-wide relative z-10">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
                             <motion.div 
                                 variants={fadeInUp}
                                 initial="initial"
                                 whileInView="whileInView"
                             >
-                                <h2 className="text-4xl md:text-7xl font-black mb-12 tracking-tighter">Ready to <br /><span className="text-blue-500">Initialize?</span></h2>
-                                <p className="text-xl text-white/40 font-secondary italic leading-relaxed max-w-lg mb-12">
-                                    Send us your institutional mandate and our board will review your partnership profile within 48 operational hours.
+                                <span className="text-[10px] font-black uppercase tracking-[1em] text-[#002366] bg-white px-5 py-2.5 rounded-full mb-12 inline-block">Secure Protocol</span>
+                                <h2 className="text-5xl md:text-8xl font-black mb-12 tracking-tighter leading-[0.9]">Ready to <br /><span className="text-white/40 italic font-serif font-normal">Initialize?</span></h2>
+                                <p className="text-xl md:text-2xl text-white/40 font-secondary leading-tight max-w-lg mb-16 italic">
+                                    Submit your institutional mandate. Our board reviews all strategic partnership profiles within 48 operational cycles.
                                 </p>
-                                <div className="space-y-8">
-                                    <div className="flex items-center gap-6">
-                                        <div className="w-12 h-[1px] bg-blue-600" />
-                                        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/30 italic">Global Registry Verification Active</p>
-                                    </div>
+                                
+                                <div className="space-y-6">
+                                    {["Registry Verification Active", "End-to-End Encryption", "Global Hub Synchronization"].map((item, i) => (
+                                        <div key={i} className="flex items-center gap-6 group">
+                                            <div className="w-8 h-[1px] bg-white/20 group-hover:w-16 group-hover:bg-[#002366] transition-all duration-700" />
+                                            <p className="text-[9px] font-black uppercase tracking-[0.5em] text-white/20 group-hover:text-white/60 transition-colors">{item}</p>
+                                        </div>
+                                    ))}
                                 </div>
                             </motion.div>
 
@@ -168,26 +211,33 @@ export default function Contact() {
                                 variants={fadeInUp}
                                 initial="initial"
                                 whileInView="whileInView"
-                                className="bg-white/5 backdrop-blur-xl border border-white/10 p-12 rounded-[40px]"
+                                className="bg-white/[0.02] backdrop-blur-3xl border border-white/10 p-12 md:p-20 rounded-[80px] shadow-[0_80px_160px_-40px_rgba(0,0,0,0.5)]"
                             >
-                                <form className="space-y-8">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <form className="space-y-12">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                                         <div className="space-y-4">
-                                            <label className="text-[10px] font-black uppercase tracking-widest text-white/40 block ml-4">Full Identity</label>
-                                            <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-blue-600 outline-none transition-all" placeholder="John Doe" />
+                                            <label className="text-[9px] font-black uppercase tracking-[0.5em] text-white/30 block ml-2">Full Identity</label>
+                                            <input type="text" className="w-full bg-white/[0.03] border-b border-white/10 rounded-none px-2 py-5 text-white focus:border-white outline-none transition-all placeholder:text-white/10" placeholder="LEAD NAME" />
                                         </div>
                                         <div className="space-y-4">
-                                            <label className="text-[10px] font-black uppercase tracking-widest text-white/40 block ml-4">Corporate Email</label>
-                                            <input type="email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-blue-600 outline-none transition-all" placeholder="exec@corporation.com" />
+                                            <label className="text-[9px] font-black uppercase tracking-[0.5em] text-white/30 block ml-2">Corporate Email</label>
+                                            <input type="email" className="w-full bg-white/[0.03] border-b border-white/10 rounded-none px-2 py-5 text-white focus:border-white outline-none transition-all placeholder:text-white/10" placeholder="EXEC@ENTITY.COM" />
                                         </div>
                                     </div>
                                     <div className="space-y-4">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40 block ml-4">Mandate Details</label>
-                                        <textarea rows="4" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-blue-600 outline-none transition-all" placeholder="Brief overview of partnership goals..."></textarea>
+                                        <label className="text-[9px] font-black uppercase tracking-[0.5em] text-white/30 block ml-2">Mandate Specification</label>
+                                        <textarea rows="4" className="w-full bg-white/[0.03] border-b border-white/10 rounded-none px-2 py-5 text-white focus:border-white outline-none transition-all placeholder:text-white/10" placeholder="Strategic objectives and vertical focus..."></textarea>
                                     </div>
-                                    <button className="w-full bg-blue-600 hover:bg-white hover:text-dark text-white py-6 rounded-2xl text-xs font-black uppercase tracking-[0.6em] transition-all duration-700 shadow-2xl">
-                                        Transmit Mandate
-                                    </button>
+                                    
+                                    <div className="pt-8">
+                                        <button className="group relative w-full h-24 overflow-hidden rounded-full transition-all duration-700">
+                                            <div className="absolute inset-0 bg-white transition-transform duration-700 group-hover:scale-95"></div>
+                                            <div className="absolute inset-0 bg-[#002366] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out"></div>
+                                            <span className="relative z-10 text-[11px] font-black uppercase tracking-[0.8em] text-dark group-hover:text-white transition-colors duration-700">
+                                                Transmit Mandate
+                                            </span>
+                                        </button>
+                                    </div>
                                 </form>
                             </motion.div>
                         </div>

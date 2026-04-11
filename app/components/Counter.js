@@ -21,9 +21,11 @@ export default function Counter({ value, direction = "up" }) {
   useEffect(() => {
     springValue.on("change", (latest) => {
       if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("en-US").format(
-          latest.toFixed(0)
-        );
+        const hasDecimal = value.toString().includes(".");
+        ref.current.textContent = Intl.NumberFormat("en-US", {
+          minimumFractionDigits: hasDecimal ? 1 : 0,
+          maximumFractionDigits: hasDecimal ? 1 : 0,
+        }).format(latest);
       }
     });
   }, [springValue]);
