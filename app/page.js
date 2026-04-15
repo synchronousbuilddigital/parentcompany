@@ -523,9 +523,9 @@ export default function Home() {
                                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                                     className="text-[64px] md:text-[110px] lg:text-[160px] font-black text-[#1A1A1A] leading-[0.8] tracking-[-0.04em]"
                                 >
-                                    architecting <br />
-                                    <span className="text-[#002366]">sovereign</span> <br />
-                                    futures<span className="text-[#002366]">.</span>
+                                    Architecting <br />
+                                    <span className="text-[#002366]">Sovereign</span> <br />
+                                    Futures<span className="text-[#002366]">.</span>
                                 </motion.h1>
                             </div>
 
@@ -899,23 +899,23 @@ export default function Home() {
                         {/* Entity Matrix */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
                             {[
-                                { 
-                                    name: "BWorth Support", icon: "eco", 
+                                {
+                                    name: "BWorth Support", icon: "eco",
                                     email: "info@bworth.co.in", phone: "+91 8826668050",
                                     ref: "Industrial Synthesis"
                                 },
-                                { 
-                                    name: "Vega Vrudhi", icon: "precision_manufacturing", 
+                                {
+                                    name: "Vega Vrudhi", icon: "precision_manufacturing",
                                     email: "saurabh@vegavruddhi.com", phone: "+91 91166 16636",
                                     ref: "Execution Framework"
                                 },
-                                { 
-                                    name: "RYM Grenergy", icon: "bolt", 
+                                {
+                                    name: "RYM Grenergy", icon: "bolt",
                                     email: "contact@rym-grenergy.com", phone: "+91 82000 55645",
                                     ref: "Energy Sovereignty"
                                 },
-                                { 
-                                    name: "Synchronous", icon: "hub", 
+                                {
+                                    name: "Synchronous", icon: "hub",
                                     email: "ops@synchronous.digital", phone: "Global",
                                     ref: "Digital Architecture"
                                 }
