@@ -45,7 +45,7 @@ export default function About() {
                     <div className="absolute top-0 left-0 w-full h-full bg-blue-600/5 mix-blend-overlay" />
                     <div className="container-wide relative z-10">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
@@ -58,7 +58,7 @@ export default function About() {
                                 </h2>
                             </motion.div>
                             <div className="lg:col-span-6 space-y-12">
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, x: -30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -30 }}
@@ -73,7 +73,7 @@ export default function About() {
                                 </motion.div>
                             </div>
                             <div className="lg:col-span-6 space-y-12">
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, x: 30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 30 }}
@@ -94,7 +94,7 @@ export default function About() {
                 {/* 3. FOUR ENTITIES OVERVIEW */}
                 <section className="py-16 bg-white">
                     <div className="container-wide">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, amount: 0.5 }}
@@ -106,33 +106,33 @@ export default function About() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             {[
-                                { 
-                                    name: "BWorth", 
-                                    sector: "Sustainable Fashion", 
+                                {
+                                    name: "BWorth",
+                                    sector: "Sustainable Fashion",
                                     desc: "Revolutionizing the fashion industry through a unique circular luxury ecosystem. Buy, sell, and recycle fashion while earning rewards through our unique buyback program that preserves the planet's beauty.",
                                     logo: "/BWORTH.jpg"
                                 },
-                                { 
-                                    name: "Vega Vrudhi", 
-                                    sector: "Execution Architecture", 
+                                {
+                                    name: "Vega Vrudhi",
+                                    sector: "Execution Architecture",
                                     desc: "Precision execution architecture bridging the gap between digital leads and on-ground reality. We deploy trained field teams to accelerate market presence for national growth engines.",
                                     logo: "/VEGA.png"
                                 },
-                                { 
-                                    name: "RYM Grenergy", 
-                                    sector: "Deep-Tech", 
+                                {
+                                    name: "RYM Grenergy",
+                                    sector: "Deep-Tech",
                                     desc: "Enabling a carbon-neutral future by developing the world’s greenest battery cell and intelligent green-tech infrastructure through AI, IoT, and Smart Automation.",
                                     logo: "https://rymgrenergy.com/_next/image?url=%2Fimages%2Flogo.png&w=128&q=75"
                                 },
-                                { 
-                                    name: "Synchronous", 
-                                    sector: "Digital Marketing", 
+                                {
+                                    name: "Synchronous",
+                                    sector: "Digital Marketing",
                                     desc: "Architecting high-velocity digital ecosystems for high-growth elite brands. We build vertically integrated brand identities and compound ROI via algorithmic process automation.",
                                     logo: "/sync.jpg"
                                 }
                             ].map((entity, idx) => (
-                                <motion.div 
-                                    key={idx} 
+                                <motion.div
+                                    key={idx}
                                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -160,7 +160,7 @@ export default function About() {
                 {/* 4. GLOBAL REACH */}
                 <section className="py-16 md:py-24 bg-[#f8f9fa]">
                     <div className="container-wide text-center">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 30 }}
@@ -172,7 +172,7 @@ export default function About() {
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, x: -50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -50 }}
@@ -187,7 +187,7 @@ export default function About() {
                                     Golf Course Ext. Road Sector – 69.
                                 </p>
                             </motion.div>
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, x: 50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 50 }}
