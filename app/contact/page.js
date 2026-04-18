@@ -117,19 +117,19 @@ const ContactCard = ({ title, email, phone, icon, refLabel, accent, objectPos })
 
         <div className="relative z-10">
             <div className="flex items-start mb-10">
-                <div className="w-14 h-14 bg-[#002366]/5 rounded-2xl flex items-center justify-center group-hover:bg-[#002366] group-hover:text-white transition-all duration-700 shadow-sm">
-                    <span className="material-symbols-outlined text-2xl">{icon}</span>
+                <div className={`w-14 h-14 bg-white shadow-xl rounded-2xl flex items-center justify-center group-hover:bg-dark group-hover:text-white transition-all duration-700`}>
+                    <span className={`material-symbols-outlined text-2xl ${accent.replace('bg-', 'text-')} group-hover:text-white transition-colors duration-700`}>{icon}</span>
                 </div>
             </div>
             <div className="mb-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.45em] text-[#002366]/40 mb-2">{refLabel}</p>
-                <h3 className="text-2xl font-black text-dark tracking-tighter">{title}</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.45em] text-dark/30 mb-2">{refLabel}</p>
+                <h3 className={`text-2xl font-black ${accent.replace('bg-', 'text-')} tracking-tighter`}>{title}</h3>
             </div>
             <div className="space-y-3">
-                <a href={`mailto:${email}`} className="block text-sm font-bold text-dark/70 hover:text-[#002366] transition-colors">{email}</a>
+                <a href={`mailto:${email}`} className="block text-sm font-bold text-dark/70 hover:text-dark transition-colors">{email}</a>
                 {phone && (
-                    <p className="text-[10px] font-black uppercase tracking-widest text-[#002366]/70 flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-blue-600 animate-pulse"></span>
+                    <p className={`text-[10px] font-black uppercase tracking-widest ${accent.replace('bg-', 'text-')} flex items-center gap-2`}>
+                        <span className={`w-1 h-1 rounded-full ${accent} animate-pulse`}></span>
                         {phone}
                     </p>
                 )}
@@ -202,7 +202,7 @@ export default function Contact() {
                                 phone="+91 8826668050"
                                 icon="eco"
                                 refLabel="Industrial Synthesis"
-                                accent="bg-green-600"
+                                accent="bg-cyan-600"
                                 objectPos="object-left-top"
                             />
                             <ContactCard
@@ -211,7 +211,7 @@ export default function Contact() {
                                 phone="+91 91166 16636"
                                 icon="precision_manufacturing"
                                 refLabel="Execution Framework"
-                                accent="bg-blue-600"
+                                accent="bg-green-600"
                                 objectPos="object-right-top"
                             />
                             <ContactCard
@@ -220,7 +220,7 @@ export default function Contact() {
                                 phone="+91 82000 55645"
                                 icon="bolt"
                                 refLabel="Energy Sovereignty"
-                                accent="bg-amber-500"
+                                accent="bg-emerald-500"
                                 objectPos="object-left-bottom"
                             />
                             <ContactCard
@@ -229,7 +229,7 @@ export default function Contact() {
                                 phone="Global Access"
                                 icon="hub"
                                 refLabel="Digital Architecture"
-                                accent="bg-indigo-600"
+                                accent="bg-orange-500"
                                 objectPos="object-right-bottom"
                             />
                         </div>
