@@ -275,7 +275,7 @@ const PortfolioItem = ({ item, index }) => {
                         alt={item.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 40vw"
-                        className="object-cover group-hover:scale-110 transition-transform duration-[3000ms] ease-out"
+                        className={`object-cover ${item.objectPos || ""} group-hover:scale-110 transition-transform duration-[3000ms] ease-out`}
                     />
                 </motion.div>
                 <div className="absolute inset-0 bg-[#002366]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
@@ -302,7 +302,7 @@ const PortfolioItem = ({ item, index }) => {
 
                 <div className="mt-auto pt-8 border-t border-dark/5">
                     <Magnetic>
-                        <Link href="/portfolio" className="inline-flex items-center gap-4 group/link">
+                        <Link href={`/portfolio#${item.title.toLowerCase().replace(/\s+/g, '-')}`} className="inline-flex items-center gap-4 group/link">
                             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-dark border-b-2 border-transparent group-hover/link:border-[#002366] transition-all duration-500">View Sovereign Entity</span>
                             <div className="w-10 h-10 rounded-full border border-dark/10 flex items-center justify-center group-hover/link:bg-dark group-hover/link:text-white transition-all duration-700">
                                 <span className="material-symbols-outlined text-sm">north_east</span>
@@ -449,7 +449,8 @@ const founders = [
 const portfolioItems = [
     {
         title: "BWorth",
-        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy.png",
+        objectPos: "object-left",
         desc: "Orchestrating a systemic shift in the industrial value chain through a proprietary circular luxury ecosystem. We integrate end-to-end lifecycle management to preserve capital and environmental equity.",
         tag: "Circular Luxury",
         tagline: "Sovereign Industrial Value Chain",
@@ -457,7 +458,8 @@ const portfolioItems = [
     },
     {
         title: "Vega Vrudhi",
-        img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 2.png",
+        objectPos: "object-left",
         desc: "Deploying high-precision execution frameworks that bridge the divide between global strategic mandates and regional operational reality. We architect the backbone of national scale logistics.",
         tag: "Managed Sales",
         tagline: "Regional Execution Infrastructure",
@@ -465,7 +467,7 @@ const portfolioItems = [
     },
     {
         title: "RYM Grenergy",
-        img: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 4.png",
         desc: "Pioneering the next generation of energy sovereignty through advanced electrochemical storage solutions. Our vertically integrated AI-driven infrastructure ensures energy security for high-growth sectors.",
         tag: "Clean Energy",
         tagline: "Sovereign Energy Infrastructure",
@@ -473,7 +475,8 @@ const portfolioItems = [
     },
     {
         title: "Synchronous",
-        img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 3.png",
+        objectPos: "object-right",
         desc: "Synthesizing brand identity with autonomous agent intelligence to create compound ROI for institutional-grade brands. We build the digital nexus where aesthetics meet algorithmic precision.",
         tag: "Autonomous AI",
         tagline: "Institutional Brand Architecture",
@@ -889,22 +892,30 @@ export default function Home() {
                                 {
                                     name: "BWorth Support", icon: "eco",
                                     email: "info@bworth.co.in", phone: "+91 8826668050",
-                                    ref: "Industrial Synthesis"
+                                    ref: "Industrial Synthesis",
+                                    color: "text-cyan-600",
+                                    hoverBg: "group-hover:bg-cyan-600"
                                 },
                                 {
                                     name: "Vega Vrudhi", icon: "precision_manufacturing",
                                     email: "saurabh@vegavruddhi.com", phone: "+91 91166 16636",
-                                    ref: "Execution Framework"
+                                    ref: "Execution Framework",
+                                    color: "text-green-600",
+                                    hoverBg: "group-hover:bg-green-600"
                                 },
                                 {
                                     name: "RYM Grenergy", icon: "bolt",
                                     email: "contact@rym-grenergy.com", phone: "+91 82000 55645",
-                                    ref: "Energy Sovereignty"
+                                    ref: "Energy Sovereignty",
+                                    color: "text-emerald-500",
+                                    hoverBg: "group-hover:bg-emerald-500"
                                 },
                                 {
                                     name: "Synchronous", icon: "hub",
                                     email: "ops@synchronous.digital", phone: "Global",
-                                    ref: "Digital Architecture"
+                                    ref: "Digital Architecture",
+                                    color: "text-orange-500",
+                                    hoverBg: "group-hover:bg-orange-500"
                                 }
                             ].map((entity, i) => (
                                 <motion.div
@@ -913,16 +924,16 @@ export default function Home() {
                                     whileHover={{ y: -10 }}
                                     className="group p-10 bg-[#f8faff] rounded-[40px] border border-[#002366]/5 hover:border-[#002366]/20 transition-all duration-700"
                                 >
-                                    <div className="w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center mb-10 group-hover:bg-[#002366] group-hover:text-white transition-all duration-700">
-                                        <span className="material-symbols-outlined text-2xl">{entity.icon}</span>
+                                    <div className={`w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center mb-10 ${entity.hoverBg} group-hover:text-white transition-all duration-700`}>
+                                        <span className={`material-symbols-outlined text-2xl ${entity.color} group-hover:text-white transition-colors duration-700`}>{entity.icon}</span>
                                     </div>
                                     <div className="mb-8">
-                                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#002366]/40 mb-2">{entity.ref}</p>
-                                        <h3 className="text-2xl font-black text-dark tracking-tight">{entity.name}</h3>
+                                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-dark/30 mb-2">{entity.ref}</p>
+                                        <h3 className={`text-2xl font-black ${entity.color} tracking-tight`}>{entity.name}</h3>
                                     </div>
                                     <div className="space-y-2">
-                                        <p className="text-sm font-bold text-dark/60 hover:text-[#002366] transition-colors">{entity.email}</p>
-                                        <p className="text-xs font-black uppercase tracking-widest text-[#002366]">{entity.phone}</p>
+                                        <p className="text-sm font-bold text-dark/60 hover:text-dark transition-colors">{entity.email}</p>
+                                        <p className={`text-xs font-black uppercase tracking-widest ${entity.color}`}>{entity.phone}</p>
                                     </div>
                                 </motion.div>
                             ))}

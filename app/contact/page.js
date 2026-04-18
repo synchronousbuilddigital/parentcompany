@@ -6,79 +6,95 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 
 const ContactOrbit = () => (
-    <div style={{ position: 'relative', width: '420px', height: '420px', margin: '0 auto' }}>
-        {/* Dashed orbit ring */}
-        <div style={{
-            position: 'absolute',
-            inset: 0,
-            borderRadius: '50%',
-            border: '1px dashed rgba(0,35,102,0.15)',
-            top: '50%', left: '50%',
-            width: '420px', height: '420px',
-            transform: 'translate(-50%,-50%)'
-        }} />
+    <div className="relative w-full aspect-square max-w-[550px] mx-auto flex justify-center items-center group">
+        
+        {/* Core Glow */}
+        <div className="absolute w-[60%] h-[60%] bg-blue-500/10 blur-[100px] rounded-full animate-pulse transition-all duration-1000 group-hover:bg-blue-600/20" />
 
-        {/* Center box */}
-        <div style={{
-            position: 'absolute',
-            width: '160px', height: '160px',
-            borderRadius: '50%',
-            background: 'rgba(0,35,102,0.07)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(0,35,102,0.12)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            flexDirection: 'column', gap: '4px',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%,-50%)',
-            zIndex: 10
-        }}>
-            <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '0.3em', color: 'rgba(0,35,102,0.4)', textTransform: 'uppercase' }}>Risemate</span>
-            <span style={{ fontSize: '16px', fontWeight: 900, color: '#002366', letterSpacing: '-0.03em' }}>Venture</span>
-        </div>
+        {/* Elaborate SVG Orbits */}
+        <svg viewBox="0 0 600 600" className="absolute w-full h-full overflow-visible pointer-events-none drop-shadow-xl" strokeLinejoin="round" strokeLinecap="round">
+            <defs>
+                <linearGradient id="primaryOrbit" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#002366" stopOpacity="0.0"/>
+                    <stop offset="50%" stopColor="#002366" stopOpacity="0.5"/>
+                    <stop offset="100%" stopColor="#002366" stopOpacity="0.0"/>
+                </linearGradient>
+                <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                </radialGradient>
+            </defs>
 
-        {/* Spinning orbit */}
-        <div style={{
-            position: 'absolute',
-            width: '100%', height: '100%',
-            animation: 'orbitSpin 18s linear infinite'
-        }}>
-            {[
-                { icon: 'phone', label: 'Call', pos: { top: '0%', left: '50%' } },
-                { icon: 'chat', label: 'Chat', pos: { top: '25%', left: '85%' } },
-                { icon: 'mail', label: 'Mail', pos: { top: '75%', left: '85%' } },
-                { icon: 'language', label: 'Web', pos: { top: '100%', left: '50%' } },
-                { icon: 'location_on', label: 'Office', pos: { top: '75%', left: '15%' } },
-                { icon: 'person', label: 'Team', pos: { top: '25%', left: '15%' } },
-            ].map(({ icon, label, pos }, i) => (
-                <div key={i} style={{
-                    position: 'absolute',
-                    ...pos,
-                    transform: 'translate(-50%, -50%)',
-                    width: '56px', height: '56px',
-                    borderRadius: '50%',
-                    background: 'rgba(0,35,102,0.06)',
-                    border: '1px solid rgba(0,35,102,0.12)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backdropFilter: 'blur(10px)',
-                    cursor: 'pointer',
-                }}>
-                    <span
-                        className="material-symbols-outlined"
-                        style={{
-                            fontSize: '20px',
-                            color: '#002366',
-                            animation: 'orbitReverse 18s linear infinite',
-                            display: 'flex',
-                        }}
-                    >{icon}</span>
+            {/* Static Inner Rings */}
+            <circle cx="300" cy="300" r="140" fill="none" stroke="#002366" strokeOpacity="0.05" strokeWidth="1" />
+            <circle cx="300" cy="300" r="90" fill="none" stroke="#002366" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 8" />
+            
+            {/* Animated Outer Orbit 1 */}
+            <g className="animate-[spin_40s_linear_infinite] origin-center">
+                <circle cx="300" cy="300" r="240" fill="none" stroke="url(#primaryOrbit)" strokeWidth="1" />
+                <circle cx="300" cy="60" r="3" fill="#002366" />
+                <line x1="300" y1="50" x2="300" y2="70" stroke="#002366" strokeWidth="1" strokeOpacity="0.5" />
+                <line x1="290" y1="60" x2="310" y2="60" stroke="#002366" strokeWidth="1" strokeOpacity="0.5" />
+            </g>
+
+            {/* Animated Middle Orbit 2 */}
+            <g className="animate-[spin_25s_linear_infinite_reverse] origin-center">
+                <circle cx="300" cy="300" r="190" fill="none" stroke="#002366" strokeWidth="1.5" strokeOpacity="0.1" strokeDasharray="15 30" />
+                <circle cx="490" cy="300" r="5" fill="#3B82F6" className="animate-pulse" />
+                <circle cx="490" cy="300" r="20" fill="url(#nodeGlow)" opacity="0.4" />
+            </g>
+
+            {/* Random tech lines */}
+            <path d="M 300 160 L 300 120" stroke="#002366" strokeWidth="1" strokeOpacity="0.2" className="animate-pulse" />
+            <path d="M 160 300 L 120 300" stroke="#002366" strokeWidth="1" strokeOpacity="0.2" className="animate-pulse" />
+            <path d="M 440 300 L 480 300" stroke="#002366" strokeWidth="1" strokeOpacity="0.2" className="animate-pulse" />
+            <path d="M 300 440 L 300 480" stroke="#002366" strokeWidth="1" strokeOpacity="0.2" className="animate-pulse" />
+        </svg>
+
+        {/* Central Core Element */}
+        <div className="relative z-10 w-48 h-48 sm:w-56 sm:h-56">
+            <div className="absolute inset-0 bg-white/40 backdrop-blur-xl border border-white shadow-[0_20px_50px_-10px_rgba(0,35,102,0.1)] rounded-full flex flex-col items-center justify-center p-6 group-hover:scale-105 transition-all duration-700 z-10">
+                <div className="absolute inset-2 border-[1px] border-dashed border-[#002366]/10 rounded-full animate-[spin_60s_linear_infinite]"></div>
+                
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#002366] to-blue-800 text-white flex items-center justify-center mb-4 shadow-lg group-hover:-translate-y-1 transition-transform duration-500">
+                    <span className="material-symbols-outlined text-2xl font-light">language</span>
                 </div>
-            ))}
+                
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#002366]/40 mb-1">Global</span>
+                <span className="text-xl font-black text-[#002366] tracking-tight">Nexus</span>
+                
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white px-4 py-1.5 rounded-full border border-dark/5 shadow-sm flex items-center gap-2 text-xs font-bold text-dark whitespace-nowrap">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Live Sync
+                </div>
+            </div>
         </div>
 
-        <style>{`
-            @keyframes orbitSpin { to { transform: rotate(360deg); } }
-            @keyframes orbitReverse { to { transform: rotate(-360deg); } }
-        `}</style>
+        {/* Floating Modules */}
+        <div className="absolute top-[15%] left-[8%] z-20 hover:scale-110 transition-transform cursor-pointer">
+            <div className="w-16 h-16 bg-white border border-[#002366]/10 shadow-[0_15px_35px_rgba(0,35,102,0.08)] rounded-2xl flex flex-col items-center justify-center backdrop-blur-md">
+                <span className="material-symbols-outlined text-blue-600 mb-1">call</span>
+                <span className="text-[8px] font-black uppercase tracking-widest text-dark/40">Voice</span>
+            </div>
+        </div>
+
+        <div className="absolute bottom-[20%] right-[5%] z-20 hover:scale-110 transition-transform cursor-pointer">
+            <div className="w-16 h-16 bg-white border border-[#002366]/10 shadow-[0_15px_35px_rgba(0,35,102,0.08)] rounded-2xl flex flex-col items-center justify-center backdrop-blur-md">
+                <span className="material-symbols-outlined text-[#002366] mb-1">support_agent</span>
+                <span className="text-[8px] font-black uppercase tracking-widest text-dark/40">Desk</span>
+            </div>
+        </div>
+
+        <div className="absolute top-[30%] right-[10%] w-10 h-10 bg-[#002366] rounded-xl flex items-center justify-center shadow-xl animate-bounce z-20" style={{ animationDuration: '4s' }}>
+             <span className="material-symbols-outlined text-white text-sm">mail</span>
+        </div>
+
+        <div className="absolute bottom-[30%] left-[10%] w-12 h-12 bg-white border border-dark/5 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all z-20">
+             <span className="material-symbols-outlined text-emerald-500 text-lg">public</span>
+        </div>
     </div>
 );
 
@@ -101,19 +117,19 @@ const ContactCard = ({ title, email, phone, icon, refLabel, accent, objectPos })
 
         <div className="relative z-10">
             <div className="flex items-start mb-10">
-                <div className="w-14 h-14 bg-[#002366]/5 rounded-2xl flex items-center justify-center group-hover:bg-[#002366] group-hover:text-white transition-all duration-700 shadow-sm">
-                    <span className="material-symbols-outlined text-2xl">{icon}</span>
+                <div className={`w-14 h-14 bg-white shadow-xl rounded-2xl flex items-center justify-center group-hover:bg-dark group-hover:text-white transition-all duration-700`}>
+                    <span className={`material-symbols-outlined text-2xl ${accent.replace('bg-', 'text-')} group-hover:text-white transition-colors duration-700`}>{icon}</span>
                 </div>
             </div>
             <div className="mb-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.45em] text-[#002366]/40 mb-2">{refLabel}</p>
-                <h3 className="text-2xl font-black text-dark tracking-tighter">{title}</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.45em] text-dark/30 mb-2">{refLabel}</p>
+                <h3 className={`text-2xl font-black ${accent.replace('bg-', 'text-')} tracking-tighter`}>{title}</h3>
             </div>
             <div className="space-y-3">
-                <a href={`mailto:${email}`} className="block text-sm font-bold text-dark/70 hover:text-[#002366] transition-colors">{email}</a>
+                <a href={`mailto:${email}`} className="block text-sm font-bold text-dark/70 hover:text-dark transition-colors">{email}</a>
                 {phone && (
-                    <p className="text-[10px] font-black uppercase tracking-widest text-[#002366]/70 flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-blue-600 animate-pulse"></span>
+                    <p className={`text-[10px] font-black uppercase tracking-widest ${accent.replace('bg-', 'text-')} flex items-center gap-2`}>
+                        <span className={`w-1 h-1 rounded-full ${accent} animate-pulse`}></span>
                         {phone}
                     </p>
                 )}
@@ -186,7 +202,7 @@ export default function Contact() {
                                 phone="+91 8826668050"
                                 icon="eco"
                                 refLabel="Industrial Synthesis"
-                                accent="bg-green-600"
+                                accent="bg-cyan-600"
                                 objectPos="object-left-top"
                             />
                             <ContactCard
@@ -195,7 +211,7 @@ export default function Contact() {
                                 phone="+91 91166 16636"
                                 icon="precision_manufacturing"
                                 refLabel="Execution Framework"
-                                accent="bg-blue-600"
+                                accent="bg-green-600"
                                 objectPos="object-right-top"
                             />
                             <ContactCard
@@ -204,7 +220,7 @@ export default function Contact() {
                                 phone="+91 82000 55645"
                                 icon="bolt"
                                 refLabel="Energy Sovereignty"
-                                accent="bg-amber-500"
+                                accent="bg-emerald-500"
                                 objectPos="object-left-bottom"
                             />
                             <ContactCard
@@ -213,7 +229,7 @@ export default function Contact() {
                                 phone="Global Access"
                                 icon="hub"
                                 refLabel="Digital Architecture"
-                                accent="bg-indigo-600"
+                                accent="bg-orange-500"
                                 objectPos="object-right-bottom"
                             />
                         </div>

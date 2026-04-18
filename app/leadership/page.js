@@ -133,8 +133,34 @@ const OrbitalNetwork = () => {
                     const rad = (e.angle * Math.PI) / 180;
                     const nx = cx + r2 * Math.cos(rad);
                     const ny = cy + r2 * Math.sin(rad);
-                    const lx = nx + (nx > cx ? 18 : -18);
-                    const anchor = nx > cx ? "start" : "end";
+                    // Determine text positioning based on angle
+                    let textX = nx;
+                    let labelY = ny;
+                    let tagY = ny;
+                    let anchor = "middle";
+
+                    if (e.angle === 0) { // Right
+                        textX = nx + 18;
+                        labelY = ny - 5;
+                        tagY = ny + 7;
+                        anchor = "start";
+                    } else if (e.angle === 180) { // Left
+                        textX = nx - 18;
+                        labelY = ny - 5;
+                        tagY = ny + 7;
+                        anchor = "end";
+                    } else if (e.angle === 90) { // Bottom
+                        textX = nx;
+                        labelY = ny + 25;
+                        tagY = ny + 35;
+                        anchor = "middle";
+                    } else if (e.angle === 270) { // Top
+                        textX = nx;
+                        labelY = ny - 30;
+                        tagY = ny - 20;
+                        anchor = "middle";
+                    }
+
                     return (
                         <g key={i}>
                             {/* Node outer ring */}
@@ -152,12 +178,12 @@ const OrbitalNetwork = () => {
                                 0{i + 1}
                             </text>
                             {/* Entity name */}
-                            <text x={lx} y={ny - 5} textAnchor={anchor} fill="#001233"
+                            <text x={textX} y={labelY} textAnchor={anchor} fill="#001233"
                                 fontSize="7.5" fontWeight="700" fontFamily="Inter" opacity="0.85">
                                 {e.label}
                             </text>
                             {/* Tag */}
-                            <text x={lx} y={ny + 7} textAnchor={anchor} fill="#002366"
+                            <text x={textX} y={tagY} textAnchor={anchor} fill="#002366"
                                 fontSize="5.5" fontFamily="Inter" opacity="0.45" letterSpacing="1">
                                 {e.tag}
                             </text>

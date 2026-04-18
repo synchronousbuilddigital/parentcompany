@@ -13,11 +13,12 @@ const entities = [
         name: "BWorth",
         tagline: "Sustainable Fashion Innovation Leader",
         tag: "Circular Luxury",
-        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy.png",
+        objectPos: "object-left",
         desc: "Revolutionizing the fashion industry through a unique circular luxury ecosystem. Buy, sell, and recycle fashion while earning rewards through our unique buyback program that preserves the planet's beauty.",
         pillars: ["BWorth Coins (1:1 Value)", "Landfill Elimination", "Live CO₂ Monitoring"],
         metrics: ["10,000+ Items Recycled", "25,000+ total Items Saved"],
-        color: "text-green-600",
+        color: "text-cyan-600",
         link: "https://bworth.co.in",
         logo: "/BWORTH.jpg"
     },
@@ -26,11 +27,12 @@ const entities = [
         name: "Vega Vrudhi",
         tagline: "Precision Execution & Growth Architecture",
         tag: "Managed Sales",
-        img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 2.png",
+        objectPos: "object-left",
         desc: "Precision execution architecture bridging the gap between digital leads and on-ground reality. We deploy trained field teams to accelerate market presence for national growth engines.",
         pillars: ["Digital Lead Fulfillment", "Activation Programs", "Merchant Onboarding"],
         sectors: ["FinTech", "FMCG", "E-Commerce", "GovTech"],
-        color: "text-blue-600",
+        color: "text-green-600",
         link: "https://vegavruddhi.com",
         logo: "/VEGA.png"
     },
@@ -39,11 +41,11 @@ const entities = [
         name: "RYM Grenergy",
         tagline: "Intelligent Systems & Deep-Tech Engineering",
         tag: "Clean Energy",
-        img: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 4.png",
         desc: "Enabling a carbon-neutral future by developing the world’s greenest battery cell and intelligent green-tech infrastructure through AI, IoT, and Smart Automation.",
         pillars: ["ULTRON Energy Platform", "INTELLEXA AI", "Weighbridge AI", "REEWS Earthquake Warning"],
         color: "text-emerald-500",
-        link: "https://rym-grenergy.com",
+        link: "https://rymgrenergy.com/",
         logo: "https://rymgrenergy.com/images/logo.png"
     },
     {
@@ -51,11 +53,12 @@ const entities = [
         name: "Synchronous",
         tagline: "High-Performance Digital Marketing Group",
         tag: "Autonomous AI",
-        img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2670&auto=format&fit=crop",
+        img: "/image copy 3.png",
+        objectPos: "object-right",
         desc: "Architecting high-velocity digital ecosystems for high-growth elite brands. We build vertically integrated brand identities and compound ROI via algorithmic process automation.",
         pillars: ["Brand Identity Architecture", "Autonomous AI Agents", "Data-Backed Growth", "Predictive Modeling"],
-        color: "text-purple-600",
-        link: "https://synchronous.digital",
+        color: "text-orange-500",
+        link: "https://www.synchronousbuilddigital.com/",
         logo: "/sync.jpg",
         logoBg: "bg-white"
     }
@@ -202,7 +205,7 @@ function EntitySection({ entity, index }) {
     const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
     return (
-        <section ref={sectionRef} className="container-wide relative">
+        <section id={entity.name.toLowerCase().replace(/\s+/g, '-')} ref={sectionRef} className="container-wide relative">
             <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24 items-center`}>
                 {/* Image side */}
                 <div className={`lg:col-span-1 border-r border-dark/5 hidden lg:block`}>
@@ -218,7 +221,7 @@ function EntitySection({ entity, index }) {
                             alt={entity.name}
                             fill
                             sizes="(max-width: 1200px) 100vw, 50vw"
-                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
+                            className={`object-cover ${entity.objectPos || ""} grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100`}
                         />
                         <div className="absolute inset-0 bg-dark/20 group-hover:bg-transparent transition-all duration-1000" />
                     </div>
